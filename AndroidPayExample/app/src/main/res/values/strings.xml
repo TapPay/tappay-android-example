@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AndroidPayExample</string>
+
+    <string name="android_pay">Android pay</string>
+    <string name="confirm_payment">確認付款</string>
+    <string name="merchant_name">Example Merchant Name</string>
+    <string name="country_code">TW</string>
+    <string name="currency_code">TWD</string>
+
+    <!--Replace below settings to yours from TapPay.-->
+    <string name="app_id">11243</string>
+    <string name="app_key">x89wWtSJAl97XzzrY29Yk4YAo26XUyMl4CRndgD4</string>
+    <string name="android_merchant_id">tech.cherri.androidpayexample</string>
+    <string name="public_key">BMQVa3m/14IlI6eeBJeS63kgwOwz+u2Imd+ETfxGG8oA0Cj1YCEuF4IuAG4T6TAeqWG3CqQj3zccLSXFHFklMno=</string>
+
+</resources>

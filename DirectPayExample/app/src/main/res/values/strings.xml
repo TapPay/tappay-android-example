@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">DirectPayExample</string>
+
+    <string name="test_partner_server">http://direct-demo.tokakyo-taiwan.com/app/pay_sandbox</string>.
+
+    <!--Replace below settings to yours from TapPay.-->
+    <string name="app_id">11242</string>
+    <string name="app_key">x89wWtSJAl97XzzrY29Yk4YAo26XUyMl4CRndgD4</string>
+
+</resources>
