@@ -9,6 +9,10 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
  >Obtain your app id and keys here.
      >https://www.tappaysdk.com/en
 
+# Demo
+
+![direct pay demo](https://media.giphy.com/media/xUOxf4aa0035sXkfeg/giphy.gif)   ![android pay demo](https://media.giphy.com/media/3ohs7MZjd7lSUOPB3G/giphy.gif)
+
 
 # Usage
 
