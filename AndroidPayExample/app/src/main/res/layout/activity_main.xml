@@ -1,64 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_android_pay"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="tech.cherri.tpdirectexample.AndroidPayActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_android_pay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="tech.cherri.tpdirectexample.AndroidPayActivity">
 
-    <TextView
-        android:id="@+id/totalAmountTV"
-        android:textSize="25sp"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-
-    <FrameLayout
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/totalAmountTV"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/frameLayout"
-        android:visibility="invisible"
-        android:layout_width="204dp"
-        android:layout_height="43dp">
-    </FrameLayout>
+        <TextView
+            android:id="@+id/totalAmountTV"
+            android:textSize="25sp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
-    <TextView
-        android:layout_below="@id/frameLayout"
-        android:id="@+id/buyerInformationTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"/>
+        <FrameLayout
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/totalAmountTV"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/frameLayout"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp">
+        </FrameLayout>
 
 
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/buyerInformationTV"
-        android:id="@+id/shippingInformationTV"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"/>
+        <TextView
+            android:layout_below="@id/frameLayout"
+            android:id="@+id/buyerInformationTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"/>
 
-    <Button
-        android:layout_marginTop="15dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/shippingInformationTV"
-        android:id="@+id/androidPayConfirmBTN"
-        android:text="@string/confirm_payment"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:gravity="center_horizontal"/>
 
-    <TextView
-        android:layout_below="@id/androidPayConfirmBTN"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/resultStateTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/buyerInformationTV"
+            android:id="@+id/shippingInformationTV"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"/>
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/shippingInformationTV"
+            android:id="@+id/androidPayConfirmBTN"
+            android:text="@string/confirm_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_below="@id/androidPayConfirmBTN"
+            android:layout_centerHorizontal="true"
+            android:textIsSelectable="true"
+            android:id="@+id/resultStateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</ScrollView>

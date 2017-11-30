@@ -1,24 +1,20 @@
 package tech.cherri.directpayexample;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.json.JSONObject;
 
 import tech.cherri.tpdirect.api.TPDCard;
 import tech.cherri.tpdirect.api.TPDCardInfo;
@@ -39,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tipsTV;
     private Button payBTN;
     private TPDCard tpdCard;
+    private TextView statusTV;
     private Button getFraudIdBTN;
 
     @Override
@@ -49,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         Log.d(TAG, "SDK version is " + TPDSetup.getVersion());
 
-
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             requestPermissions();
         } else {
@@ -58,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setupViews() {
+        statusTV = (TextView) findViewById(R.id.statusTV);
         tipsTV = (TextView) findViewById(R.id.tipsTV);
         payBTN = (Button) findViewById(R.id.payBTN);
         payBTN.setOnClickListener(this);
@@ -95,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "startTapPaySetting");
         //1.Setup environment.
         TPDSetup.initInstance(getApplicationContext(),
-                Integer.parseInt(getString(R.string.app_id)), getString(R.string.app_key), TPDServerType.Sandbox);
+                Integer.parseInt(getString(R.string.global_test_app_id)), getString(R.string.global_test_app_key), TPDServerType.Sandbox);
 
         //2.Setup input form
         tpdForm = (TPDForm) findViewById(R.id.tpdCardInputForm);
@@ -126,10 +123,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.d("TPDirect createToken", "cardLastFour:  " + cardLastFour);
 
                 Toast.makeText(MainActivity.this,
-                        "Create Token Success\n" + "Waiting for transaction ......",
+                        "Create Token Success",
                         Toast.LENGTH_SHORT).show();
 
-                ExecutePay(token, cardLastFour);
+                String resultStr = "Your prime is " + token
+                        + "\nUse below cURL to proceed the payment : \n"
+                        + ApiUtil.generatePayByPrimeCURLForSandBox(token,
+                        getString(R.string.global_test_partnerKey),
+                        getString(R.string.global_test_merchant_id));
+
+                statusTV.setText(resultStr);
+                Log.d(TAG, resultStr);
+
             }
         };
         TPDTokenFailureCallback tpdTokenFailureCallback = new TPDTokenFailureCallback() {
@@ -152,10 +157,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void ExecutePay(String token, String cardLastFour) {
-        new PayAsyncTask().execute(token, cardLastFour);
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -175,36 +176,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private class PayAsyncTask extends AsyncTask<String, Void, JSONObject> {
-        private String _token;
-        private String _cardLastFour;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected JSONObject doInBackground(String... args) {
-            _token = args[0];
-            _cardLastFour = args[1];
-
-            NetworkHelper networkHelper = new NetworkHelper(getString(R.string.test_partner_server));
-            networkHelper.addInputEntity("prime", _token);
-            return networkHelper.doPost();
-        }
-
-
-        @Override
-        protected void onPostExecute(JSONObject json) {
-            Log.d("TPDirect Pay Response", json.toString());
-
-            Intent intent = new Intent(MainActivity.this, ResponseActivity.class);
-            intent.putExtra("token", _token);
-            intent.putExtra("cardLastFour", _cardLastFour);
-            intent.putExtra("response", json.toString());
-            startActivity(intent);
-
-        }
-    }
 }

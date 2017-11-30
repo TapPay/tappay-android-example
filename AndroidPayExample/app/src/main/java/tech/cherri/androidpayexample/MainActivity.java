@@ -65,7 +65,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         //Setup environment.
         TPDSetup.initInstance(getApplicationContext(),
-                Integer.parseInt(getString(R.string.app_id)), getString(R.string.app_key), TPDServerType.Sandbox);
+                Integer.parseInt(getString(R.string.global_test_app_id)), getString(R.string.global_test_app_key), TPDServerType.Sandbox);
 
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -119,10 +119,10 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private void prepareAndroidPay() {
         TPDMerchant tpdMerchant = new TPDMerchant();
         tpdMerchant.setMerchantName(getString(R.string.merchant_name));
-        tpdMerchant.setAndroidMerchantId(getString(R.string.android_merchant_id));
+        tpdMerchant.setAndroidMerchantId(getString(R.string.global_test_android_merchant_id));
         tpdMerchant.setCountryCode(getString(R.string.country_code));
         tpdMerchant.setCurrencyCode(getString(R.string.currency_code));
-        tpdMerchant.setPublicKey(getString(R.string.public_key));
+        tpdMerchant.setPublicKey(getString(R.string.global_test_public_key));
         tpdMerchant.setSupportedNetworks(allowedNetworks);
 
         TPDConsumer tpdConsumer = new TPDConsumer();
@@ -131,13 +131,13 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         //Add the goods from your shopping page.
         tpdCart = new TPDCart();
-        TPDPaymentItem paymentItemBook = new TPDPaymentItem("book", "12.00", LineItem.Role.REGULAR);
+        TPDPaymentItem paymentItemBook = new TPDPaymentItem("book", "1.00", LineItem.Role.REGULAR);
         TPDPaymentItem paymentItemDiscount = new TPDPaymentItem("discount", "-2.00", LineItem.Role.REGULAR);
-        TPDPaymentItem paymentItemShipping = new TPDPaymentItem("shipping", "3.00", LineItem.Role.SHIPPING);
+        TPDPaymentItem paymentItemShipping = new TPDPaymentItem("shipping", "2.00", LineItem.Role.SHIPPING);
         tpdCart.addPaymentItem(paymentItemBook);
         tpdCart.addPaymentItem(paymentItemDiscount);
         tpdCart.addPaymentItem(paymentItemShipping);
-        totalAmountTV.setText("總金額 : " + tpdCart.calculateCartTotal() + " 元");
+        totalAmountTV.setText("Total amount : " + tpdCart.calculateCartTotal() + " 元");
 
         tpdAndroidPay = new TPDAndroidPay(this, tpdMerchant, tpdConsumer);
         tpdAndroidPay.canUserPayWithNetworks(this, allowedNetworks);
@@ -255,14 +255,20 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     @Override
     public void onSuccess(String prime, TPDCardInfo cardInfo) {
         hideProgressDialog();
-        Log.d(TAG, "prime =" + prime);
-        resultStateTV.setText("Your prime is " + prime);
+
+        String resultStr = "Your prime is " + prime
+                + "\nUse below cURL to proceed the payment : \n"
+                + ApiUtil.generatePayByPrimeCURLForSandBox(prime,
+                getString(R.string.global_test_partnerKey),
+                getString(R.string.global_test_merchant_id));
+
+        resultStateTV.setText(resultStr);
+        Log.d(TAG, resultStr);
     }
 
     @Override
     public void onFailure(int status, String reportMsg) {
         hideProgressDialog();
-        Log.d(TAG, "TPDirect createToken failure : " + status + ", msg : " + reportMsg);
         resultStateTV.setText("TPDirect createToken failure : " + status + ", msg : " + reportMsg);
     }
 
