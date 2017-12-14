@@ -20,7 +20,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
 ![android pay demo](https://media.giphy.com/media/3ohs7MZjd7lSUOPB3G/giphy.gif)
 
 ## Pay with Google
-![pay with google demo](https://media.giphy.com/media/3oxHQAYrwCYdXYLmqQ/giphy.gif)
+![pay with google demo](Gif/pay_with_google_demo.gif)
 
 
 # Usage
