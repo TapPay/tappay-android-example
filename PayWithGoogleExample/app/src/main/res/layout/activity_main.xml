@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:fillViewport="false">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_google_pay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+
+        <TextView
+            android:id="@+id/totalAmountTV"
+            android:textSize="25sp"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <include
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/totalAmountTV"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/googlePaymentBuyBTN"
+            layout="@layout/pay_with_google_button"
+            android:layout_width="230dp"
+            android:layout_height="48sp"
+            />
+
+
+        <TextView
+            android:layout_below="@id/googlePaymentBuyBTN"
+            android:id="@+id/buyerInformationTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/buyerInformationTV"
+            android:id="@+id/shippingInformationTV"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"/>
+
+        <Button
+            android:layout_marginTop="5dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/shippingInformationTV"
+            android:id="@+id/confirmBTN"
+            android:text="@string/confirm_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"/>
+
+        <TextView
+            android:layout_below="@id/confirmBTN"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/googlePaymentResultStateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+</ScrollView>

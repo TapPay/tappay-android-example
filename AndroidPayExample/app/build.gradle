@@ -7,8 +7,8 @@ android {
         applicationId 'tech.cherri.androidpayexample'
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 2
-        versionName "2.1.4"
+        versionCode 3
+        versionName "2.1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

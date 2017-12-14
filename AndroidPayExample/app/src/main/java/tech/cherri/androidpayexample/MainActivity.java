@@ -43,7 +43,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private static final int REQUEST_CODE_RESOLVE_LOAD_FULL_WALLET = 103;
     private FrameLayout frameLayout;
     private TPDAndroidPay tpdAndroidPay;
-    private int[] allowedNetworks = new int[]{WalletConstants.CardNetwork.VISA, WalletConstants.CardNetwork.MASTERCARD};
+        private int[] allowedNetworks = new int[]{WalletConstants.CardNetwork.VISA, WalletConstants.CardNetwork.MASTERCARD};
 
     private TPDCart tpdCart;
     private Button confirmBTN;
@@ -257,7 +257,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         hideProgressDialog();
 
         String resultStr = "Your prime is " + prime
-                + "\nUse below cURL to proceed the payment : \n"
+                + "\n\nUse below cURL to proceed the payment : \n"
                 + ApiUtil.generatePayByPrimeCURLForSandBox(prime,
                 getString(R.string.global_test_partnerKey),
                 getString(R.string.global_test_merchant_id));

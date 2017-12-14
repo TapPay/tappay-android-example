@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.LENGTH_SHORT).show();
 
                 String resultStr = "Your prime is " + token
-                        + "\nUse below cURL to proceed the payment : \n"
+                        + "\n\nUse below cURL to proceed the payment : \n"
                         + ApiUtil.generatePayByPrimeCURLForSandBox(token,
                         getString(R.string.global_test_partnerKey),
                         getString(R.string.global_test_merchant_id));

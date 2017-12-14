@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">PayWithGoogleExample</string>
+
+
+    <string name="global_test_app_id">11341</string>
+    <string name="global_test_app_key">app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC</string>
+
+    <string name="global_test_android_merchant_id">gh-androidpayexample</string>
+
+    <string name="global_test_partnerKey">partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM</string>
+    <string name="global_test_merchant_id">GlobalTesting_CTBC</string>
+
+    <string name="pay_with_google_content_description">Pay with Google</string>
+    <string name="confirm_payment">確認付款</string>
+
+</resources>
