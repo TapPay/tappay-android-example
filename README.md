@@ -149,7 +149,6 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     - TPDMerchant for Pay with Google process 
     ```
     TPDMerchant tpdMerchant = new TPDMerchant();
-    tpdMerchant.setAndroidMerchantId(getString(R.string.global_test_android_merchant_id));
     tpdMerchant.setSupportedNetworks(allowedNetworks);
     ```
     - TPDConsumer for requiring consumer's payment detail.

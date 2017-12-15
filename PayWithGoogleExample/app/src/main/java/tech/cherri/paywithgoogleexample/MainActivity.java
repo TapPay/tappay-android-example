@@ -116,7 +116,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void preparePayWithGoogle() {
         TPDMerchant tpdMerchant = new TPDMerchant();
-        tpdMerchant.setAndroidMerchantId(getString(R.string.global_test_android_merchant_id));
         tpdMerchant.setSupportedNetworks(allowedNetworks);
 
         TPDConsumer tpdConsumer = new TPDConsumer();
