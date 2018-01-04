@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.identity.intents.model.UserAddress;
 import com.google.android.gms.wallet.AutoResolveHelper;
 import com.google.android.gms.wallet.PaymentData;
 import com.google.android.gms.wallet.TransactionInfo;
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TPDConsumer tpdConsumer = new TPDConsumer();
         tpdConsumer.setPhoneNumberRequired(false);
         tpdConsumer.setShippingAddressRequired(false);
-        tpdConsumer.setEmailRequired(true);
+        tpdConsumer.setEmailRequired(false);
 
         tpdPayWithGoogle = new TPDPayWithGoogle(this, tpdMerchant, tpdConsumer);
         tpdPayWithGoogle.canUserPayWithGoogle(this);
@@ -185,16 +186,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void revealPaymentInfo(PaymentData paymentData) {
         String email = paymentData.getEmail();
 
-//        UserAddress userAddress = paymentData.getShippingAddress();
-//
-//        String shippingAddr = userAddress.getAdministrativeArea()
-//                + userAddress.getAddress5()
-//                + userAddress.getAddress4()
-//                + userAddress.getAddress3()
-//                + userAddress.getAddress2()
-//                + userAddress.getAddress1();
+        UserAddress userAddress = paymentData.getShippingAddress();
 
-//        String phoneNumber = userAddress.getPhoneNumber();
+        String shippingAddr = userAddress.getAdministrativeArea()
+                + userAddress.getAddress5()
+                + userAddress.getAddress4()
+                + userAddress.getAddress3()
+                + userAddress.getAddress2()
+                + userAddress.getAddress1();
+
+        String phoneNumber = userAddress.getPhoneNumber();
         String cardNetwork = paymentData.getCardInfo().getCardNetwork();
         String cardDetails = paymentData.getCardInfo().getCardDetails();
         String cardDescription = paymentData.getCardInfo().getCardDescription();
@@ -204,9 +205,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 + "Card Network : " + cardNetwork + "\n"
                 + "Card Details : " + cardDetails + "\n"
                 + "Card Description : " + cardDescription + "\n"
+                + "Phone Number : " + phoneNumber + "\n"
 
         );
-//        shippingInformationTV.setText("Shipping Address:" + shippingAddr + "\n");
+        shippingInformationTV.setText("Shipping Address:" + shippingAddr + "\n");
     }
 
     private void getPrimeFromTapPay(PaymentData paymentData) {

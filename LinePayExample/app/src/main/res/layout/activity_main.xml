@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="false"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_line_pay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="tech.cherri.linepayexample.MainActivity">
+
+
+        <include
+            android:id="@+id/linePayBTN"
+            layout="@layout/line_pay_icon"
+            android:layout_width="146.4dp"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
+
+
+        <TextView
+            android:id="@+id/getPrimeResultStateTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linePayBTN"
+            android:layout_centerHorizontal="true"
+            android:textIsSelectable="true" />
+
+
+        <TextView
+            android:id="@+id/linePayResultTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/getPrimeResultStateTV"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:textIsSelectable="true" />
+
+    </RelativeLayout>
+</ScrollView>
