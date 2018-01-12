@@ -17,10 +17,20 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="tech.cherri.linepayexample.MainActivity">
 
+        <TextView
+            android:id="@+id/totalAmountTV"
+            android:textSize="25sp"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
 
         <include
             android:id="@+id/linePayBTN"
             layout="@layout/line_pay_icon"
+            android:layout_below="@id/totalAmountTV"
             android:layout_width="146.4dp"
             android:layout_height="48dp"
             android:layout_centerHorizontal="true"

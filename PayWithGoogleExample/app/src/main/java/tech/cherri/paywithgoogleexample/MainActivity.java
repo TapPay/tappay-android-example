@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.identity.intents.model.UserAddress;
 import com.google.android.gms.wallet.AutoResolveHelper;
 import com.google.android.gms.wallet.PaymentData;
 import com.google.android.gms.wallet.TransactionInfo;
@@ -47,7 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RelativeLayout googlePaymentBuyBTN;
     private TextView totalAmountTV, googlePaymentResultStateTV;
     private TextView buyerInformationTV;
-    private TextView shippingInformationTV;
     private PaymentData paymentData;
     private Button confirmBTN;
 
@@ -81,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         googlePaymentBuyBTN.setEnabled(false);
 
         buyerInformationTV = (TextView) findViewById(R.id.buyerInformationTV);
-        shippingInformationTV = (TextView) findViewById(R.id.shippingInformationTV);
 
         confirmBTN = (Button) findViewById(R.id.confirmBTN);
         confirmBTN.setOnClickListener(this);
@@ -142,13 +139,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.googlePaymentBuyBTN){
+        if (view.getId() == R.id.googlePaymentBuyBTN) {
             tpdPayWithGoogle.requestPayment(TransactionInfo.newBuilder()
                     .setTotalPriceStatus(WalletConstants.TOTAL_PRICE_STATUS_FINAL)
                     .setTotalPrice("1")
                     .setCurrencyCode("TWD")
                     .build(), LOAD_PAYMENT_DATA_REQUEST_CODE);
-        }else if(view.getId() == R.id.confirmBTN){
+        } else if (view.getId() == R.id.confirmBTN) {
             getPrimeFromTapPay(paymentData);
         }
     }
@@ -184,31 +181,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void revealPaymentInfo(PaymentData paymentData) {
-        String email = paymentData.getEmail();
 
-        UserAddress userAddress = paymentData.getShippingAddress();
-
-        String shippingAddr = userAddress.getAdministrativeArea()
-                + userAddress.getAddress5()
-                + userAddress.getAddress4()
-                + userAddress.getAddress3()
-                + userAddress.getAddress2()
-                + userAddress.getAddress1();
-
-        String phoneNumber = userAddress.getPhoneNumber();
         String cardNetwork = paymentData.getCardInfo().getCardNetwork();
         String cardDetails = paymentData.getCardInfo().getCardDetails();
         String cardDescription = paymentData.getCardInfo().getCardDescription();
 
-
-        buyerInformationTV.setText("Email:" + email + "\n"
-                + "Card Network : " + cardNetwork + "\n"
+        buyerInformationTV.setText("Card Network : " + cardNetwork + "\n"
                 + "Card Details : " + cardDetails + "\n"
                 + "Card Description : " + cardDescription + "\n"
-                + "Phone Number : " + phoneNumber + "\n"
-
         );
-        shippingInformationTV.setText("Shipping Address:" + shippingAddr + "\n");
+
     }
 
     private void getPrimeFromTapPay(PaymentData paymentData) {
@@ -233,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onFailure(int status, String reportMsg) {
         hideProgressDialog();
-        showMessage("TapPay getPrime failed , status = "+ status + ", msg : " + reportMsg);
+        showMessage("TapPay getPrime failed , status = " + status + ", msg : " + reportMsg);
         Log.d("TPDirect createToken", "failure : " + status + ", msg : " + reportMsg);
     }
 

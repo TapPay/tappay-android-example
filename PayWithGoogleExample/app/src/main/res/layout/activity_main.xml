@@ -43,18 +43,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"/>
 
-        <TextView
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/buyerInformationTV"
-            android:id="@+id/shippingInformationTV"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"/>
-
         <Button
             android:layout_marginTop="5dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/shippingInformationTV"
+            android:layout_below="@id/buyerInformationTV"
             android:id="@+id/confirmBTN"
             android:text="@string/confirm_payment"
             android:layout_width="wrap_content"

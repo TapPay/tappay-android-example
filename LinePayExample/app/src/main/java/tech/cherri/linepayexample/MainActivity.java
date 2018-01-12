@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
     private TPDLinePay tpdLinePay;
     private TextView getPrimeResultStateTV;
     private TextView linePayResultTV;
+    private TextView totalAmountTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +95,8 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
     }
 
     private void setupViews() {
+        totalAmountTV = (TextView) findViewById(R.id.totalAmountTV);
+        totalAmountTV.setText("Total amount : 1.00 元");
         getPrimeResultStateTV = (TextView) findViewById(R.id.getPrimeResultStateTV);
         linePayResultTV = (TextView) findViewById(R.id.linePayResultTV);
         linePayBTN = (RelativeLayout) findViewById(R.id.linePayBTN);
@@ -112,13 +115,17 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
     public void onSuccess(String prime, TPDCardInfo cardInfo) {
         hideProgressDialog();
         String resultStr = "Your prime is " + prime
-                + "\n\nUse below cURL to proceed the payment : \n"
+                + "\n\nUse below cURL to get payment url with Pay-by-Prime API on your server side: \n"
                 + ApiUtil.generatePayByPrimeCURLForSandBox(prime,
                 getString(R.string.global_test_partnerKey),
                 getString(R.string.global_test_merchant_id));
 
         showMessage(resultStr);
         Log.d(TAG, resultStr);
+
+        //Proceed LINE Pay with below function.
+//        tpdLinePay.redirectWithUrl("Your payment url");
+
     }
 
 
@@ -129,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
     }
 
     private void handleIncomingIntent(Intent intent) {
-        if(getIntent().getDataString() != null && getIntent().getDataString().contains(AppConstants.TAPPAY_LINEPAY_RESULT_CALLBACK_URI)){
+        if(intent.getDataString() != null && intent.getDataString().contains(AppConstants.TAPPAY_LINEPAY_RESULT_CALLBACK_URI)){
             TPDLinePayResult result;
             try {
                 result = TPDLinePay.parseToLinePayResult(getApplicationContext(), intent.getData());
