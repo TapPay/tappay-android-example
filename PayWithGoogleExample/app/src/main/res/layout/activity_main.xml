@@ -30,7 +30,7 @@
             android:layout_below="@id/totalAmountTV"
             android:layout_centerHorizontal="true"
             android:id="@+id/googlePaymentBuyBTN"
-            layout="@layout/pay_with_google_button"
+            layout="@layout/gpay_button"
             android:layout_width="230dp"
             android:layout_height="48sp"
             />

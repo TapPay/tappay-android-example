@@ -8,7 +8,8 @@
     <string name="global_test_partnerKey">partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM</string>
     <string name="global_test_merchant_id">GlobalTesting_CTBC</string>
 
-    <string name="pay_with_google_content_description">Pay with Google</string>
+    <string name="gpay_content_description">Buy with Google Pay</string>
+
     <string name="confirm_payment">確認付款</string>
 
 </resources>
