@@ -14,10 +14,10 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
 ![direct pay demo](https://media.giphy.com/media/xUOxf4aa0035sXkfeg/giphy.gif)
 
 
-## Pay with Google
-![pay with google demo](Gif/pay_with_google_demo.gif)
+## Google Pay
+![google pay demo](Gif/pay_with_google_demo.gif)
 
-## Line Pay
+## LINE Pay
 ![line pay demo](Gif/line_pay_demo.gif)
 
 # Usage
@@ -58,7 +58,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     card.getPrime();
     ```
     
-## Pay with Google
+## Google Pay
 
 1. Import tpdirect.aar into your project.
 2. Add dependencies into your app's **build.gradle**
@@ -81,7 +81,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     , TPDServerType.Sandbox);
     ```
 5. Create : 
-    - TPDMerchant for Pay with Google process 
+    - TPDMerchant for Google Pay process 
     ```
     TPDMerchant tpdMerchant = new TPDMerchant();
     tpdMerchant.setSupportedNetworks(allowedNetworks);
@@ -99,7 +99,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     TPDPayWithGoogle tpdPayWithGoogle = new TPDPayWithGoogle(this, tpdMerchant, tpdConsumer);
     ```
 
-7. Check Pay with Google availability.
+7. Check Google Pay availability.
     ```
     tpdPayWithGoogle.canUserPayWithGoogle(TPDPayWithGoogleListener var1);
     ```
@@ -119,7 +119,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     ```
     
     
-## Line Pay
+## LINE Pay
 
 1. Import tpdirect.aar into your project.
 2. Use TPDSetup to initialize the SDK and setup environment.
@@ -127,7 +127,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     TPDSetup.initInstance(getApplicationContext(), "APP_ID", "APP_KEY"
     , TPDServerType.Sandbox);
     ```
-3. Add below intent-filter to an Activity for receiving Line Pay Result in AndroidManifest.xml and set launch mode to "SingleTask"
+3. Add below intent-filter to an Activity for receiving LINE Pay Result in AndroidManifest.xml and set launch mode to "SingleTask"
     
     For example :
     ```xml
@@ -146,7 +146,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
         </intent-filter>
     </activity>
     ```
-4. Check Line Pay availability.
+4. Check LINE Pay availability.
     ```
     boolean isLinePayAvailable =TPDLinePay.isLinePayAvailable(Context context);
     ```

@@ -123,8 +123,8 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
         showMessage(resultStr);
         Log.d(TAG, resultStr);
 
-        //Proceed LINE Pay with below function.
-//        tpdLinePay.redirectWithUrl("Your payment url");
+        //Proceed LINE Pay with below function. (Note : Should not get prime again before redirect.Otherwise, the SDK can't get transaction result correctly.)
+//        tpdLinePay.redirectWithUrl("Your payment url ");
 
     }
 
