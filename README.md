@@ -164,10 +164,12 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     ```
 7. Receive LinePayResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
     ```
-    TPDLinePayResult result;
-    try {
-        result = TPDLinePay.parseToLinePayResult(Context, intent.getData());
-    } catch (TPDLinePayException e) {
-        //Error while parsing.
-    }
+    tpdLinePay.parseToLinePayResult(Context context, intent.getData(), TPDLinePayResultListener listener);
     ```
+8. Obtain TPDLinePayResult in "onParseSuccess"
+TPDLinePayResult has:
+    - status (0 = Success , 924 = Canceled by User)
+    - recTradeId 
+    - bankTransactionId 
+    - orderNumber
+

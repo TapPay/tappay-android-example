@@ -21,11 +21,12 @@ import tech.cherri.tpdirect.api.TPDLinePay;
 import tech.cherri.tpdirect.api.TPDLinePayResult;
 import tech.cherri.tpdirect.api.TPDServerType;
 import tech.cherri.tpdirect.api.TPDSetup;
+import tech.cherri.tpdirect.callback.TPDLinePayResultListener;
 import tech.cherri.tpdirect.callback.TPDTokenFailureCallback;
 import tech.cherri.tpdirect.callback.TPDTokenSuccessCallback;
 import tech.cherri.tpdirect.exception.TPDLinePayException;
 
-public class MainActivity extends AppCompatActivity implements TPDTokenFailureCallback, TPDTokenSuccessCallback, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements TPDTokenFailureCallback, TPDTokenSuccessCallback, View.OnClickListener, TPDLinePayResultListener {
     private static final String TAG = "MainActivity";
     private static final int REQUEST_READ_PHONE_STATE = 101;
     private RelativeLayout linePayBTN;
@@ -43,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
 
         Log.d(TAG, "SDK version is " + TPDSetup.getVersion());
 
-        handleIncomingIntent(getIntent());
-
         //Setup environment.
         TPDSetup.initInstance(getApplicationContext(),
                 Integer.parseInt(getString(R.string.global_test_app_id)), getString(R.string.global_test_app_key), TPDServerType.Sandbox);
@@ -54,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
         } else {
             prepareLinePay();
         }
+
+        handleIncomingIntent(getIntent());
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
         showMessage(resultStr);
         Log.d(TAG, resultStr);
 
-        //Proceed LINE Pay with below function. (Note : Should not get prime again before redirect.Otherwise, the SDK can't get transaction result correctly.)
+        //Proceed LINE Pay with below function.
 //        tpdLinePay.redirectWithUrl("Your payment url ");
 
     }
@@ -137,20 +138,12 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
 
     private void handleIncomingIntent(Intent intent) {
         if(intent.getDataString() != null && intent.getDataString().contains(AppConstants.TAPPAY_LINEPAY_RESULT_CALLBACK_URI)){
-            TPDLinePayResult result;
-            try {
-                result = TPDLinePay.parseToLinePayResult(getApplicationContext(), intent.getData());
-            } catch (TPDLinePayException e) {
-                result = null;
-                showMessage(e.getMessage());
+            if (tpdLinePay == null) {
+                prepareLinePay();
             }
 
-            if (result != null) {
-                linePayResultTV.setText("status:" + result.getStatus()
-                        + "\nrec_trade_id:" + result.getRecTradeId()
-                        + "\nbank_transaction_id:" + result.getBankTransactionId()
-                        + "\norder_number:" + result.getOrderNumber());
-            }
+            showProgressDialog();
+            tpdLinePay.parseToLinePayResult(getApplicationContext(), intent.getData(), this);
         }
     }
 
@@ -183,4 +176,20 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
         }
     }
 
+    @Override
+    public void onParseSuccess(TPDLinePayResult tpdLinePayResult) {
+        hideProgressDialog();
+        if (tpdLinePayResult != null) {
+            linePayResultTV.setText("status:" + tpdLinePayResult.getStatus()
+                    + "\nrec_trade_id:" + tpdLinePayResult.getRecTradeId()
+                    + "\nbank_transaction_id:" + tpdLinePayResult.getBankTransactionId()
+                    + "\norder_number:" + tpdLinePayResult.getOrderNumber());
+        }
+    }
+
+    @Override
+    public void onParseFail(int status, String msg) {
+        hideProgressDialog();
+        linePayResultTV.setText("Parse LINE Pay result failed  status : " + status + " , msg : " + msg);
+    }
 }
