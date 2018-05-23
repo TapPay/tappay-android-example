@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tech.cherri.samsungpayexample">
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!--For Samsung Pay-->
+
+        <!--Set to 'N' if in release mode.-->
+        <meta-data
+            android:name="debug_mode"
+            android:value="Y" />
+
+        <meta-data
+            android:name="spay_sdk_api_level"
+            android:value="1.8" />
+
+        <!--Only Samsung accounts bound with below debug key can use Samsung Pay.-->
+        <!--Debug Key is valid for 3 months;-->
+        <!--Remove below metadata if in release mode-->
+        <meta-data
+            android:name="spay_debug_api_key"
+            android:value="3aa1b5808f404452b3c1d814ba6939d9" />
+
+
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

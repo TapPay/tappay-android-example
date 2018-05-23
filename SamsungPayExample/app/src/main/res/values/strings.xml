@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">SamsungPayExample</string>
+
+    <string name="global_test_app_id">11341</string>
+    <string name="global_test_app_key">app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC</string>
+
+    <string name="global_test_partnerKey">partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM</string>
+    <string name="global_test_merchant_id">GlobalTesting_CTBC</string>
+
+    <string name="global_test_samsung_merchant_id">tech.cherri.samsungpayexample</string>
+    <string name="global_test_samsung_pay_service_id_sandbox">5bf84c6040dc4b8e907aa1</string>
+</resources>

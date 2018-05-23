@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @RequiresApi(Build.VERSION_CODES.M)
     private void requestPermissions() {
-        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "PERMISSION IS ALREADY GRANTED");
             startTapPaySetting();
         } else {

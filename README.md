@@ -20,6 +20,10 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
 ## LINE Pay
 ![line pay demo](Gif/line_pay_demo.gif)
 
+## Samsung Pay
+![samsung pay demo](Gif/samsung_pay_demo.gif)
+
+
 # Usage
 
 ## Direct Pay
@@ -173,3 +177,71 @@ TPDLinePayResult has:
     - bankTransactionId 
     - orderNumber
 
+
+## Samsung Pay
+
+1. Import tpdirect.aar and samsungpay-1.x.jar into your project.
+
+2. Add below meta data to your application tag in AndroidManifest.xml
+    
+    For example :
+    ```xml
+      <application
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/AppTheme"
+        .
+        .
+        .>
+
+          <!--Set to 'N' if in release mode.-->
+        <meta-data
+            android:name="debug_mode"
+            android:value="Y" />
+
+        <meta-data
+            android:name="spay_sdk_api_level"
+            android:value="1.8" />
+        
+        <!--Debug Key is valid for 3 months;-->
+        <!--Remove below metadata if in release mode-->
+        <meta-data
+            android:name="spay_debug_api_key"
+            android:value=“{Your debug_api_key obtained from Samsung}” />
+
+       <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+    ```
+3. Use TPDSetup to initialize the SDK and setup environment.
+    ```Java
+    TPDSetup.initInstance(getApplicationContext(), "APP_ID", "APP_KEY"
+    , TPDServerType.Sandbox);
+    ```
+
+4. Create TPDMerchant for Samsung Pay process 
+    ```
+    TPDMerchant tpdMerchant = new TPDMerchant();
+    tpdMerchant.setMerchantName(“Your Merchant Name");
+    tpdMerchant.setSupportedNetworks(allowedNetworks);
+    tpdMerchant.setSamsungMerchantId(“Your SamsungMerchantId obtained from TapPay Portal”));
+    tpdMerchant.setCurrencyCode("TWD");
+
+    ```
+5. Setup TPDSamsungPay with TPDMerchant and service Id
+    ```Java
+    TPDSamsungPay tpdSamsungPay = new TPDSamsungPay(Context context, "Your serviceId obtained from Samsung", tpdMerchant);
+    ```
+
+6. Check Samsung Pay availability.
+    ```
+    boolean isSamsungPayAvailable =tpdSamsungPay.isSamsungPayAvailable(TPDSamsungPayStatusListener listener);
+    ```
+    
+7. Get Prime from TapPay.
+    ```
+    tpdSamsungPay.getPrime(itemTotalAmount, shippingPrice, tax, totalAmount, TPDTokenSuccessCallback, TPDTokenFailureCallback);
+    ```

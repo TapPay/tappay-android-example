@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.google.android.gms.wallet.PaymentData;
 import com.google.android.gms.wallet.TransactionInfo;
 import com.google.android.gms.wallet.WalletConstants;
 
+import tech.cherri.tpdirect.api.TPDCard;
 import tech.cherri.tpdirect.api.TPDCardInfo;
 import tech.cherri.tpdirect.api.TPDConsumer;
 import tech.cherri.tpdirect.api.TPDMerchant;
@@ -35,11 +37,10 @@ import tech.cherri.tpdirect.callback.TPDTokenSuccessCallback;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, TPDPayWithGoogleListener, TPDTokenFailureCallback, TPDTokenSuccessCallback {
     private static final String TAG = "MainActivity";
-    private int[] allowedNetworks = new int[]{
-            WalletConstants.CARD_NETWORK_VISA
-            , WalletConstants.CARD_NETWORK_MASTERCARD
-            , WalletConstants.CARD_NETWORK_JCB
-            , WalletConstants.CARD_NETWORK_AMEX};
+    private TPDCard.CardType[] allowedNetworks = new TPDCard.CardType[]{TPDCard.CardType.Visa
+            , TPDCard.CardType.MasterCard
+            , TPDCard.CardType.JCB
+            , TPDCard.CardType.AmericanExpress};
     private static final int REQUEST_READ_PHONE_STATE = 101;
     private static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 102;
     private TPDPayWithGoogle tpdPayWithGoogle;
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @RequiresApi(Build.VERSION_CODES.M)
     private void requestPermissions() {
-        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
             Log.d(TAG, "PERMISSION IS ALREADY GRANTED");
             preparePayWithGoogle();
         } else {
