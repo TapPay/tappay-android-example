@@ -93,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
             } catch (TPDLinePayException e) {
                 showMessage(e.getMessage());
             }
+        }else{
+            linePayBTN.setEnabled(false);
         }
     }
 
