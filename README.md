@@ -15,7 +15,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
 
 
 ## Google Pay
-![google pay demo](Gif/pay_with_google_demo.gif)
+![google pay demo](Gif/google_pay_demo.gif)
 
 ## LINE Pay
 ![line pay demo](Gif/line_pay_demo.gif)
@@ -67,7 +67,8 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
 1. Import tpdirect.aar into your project.
 2. Add dependencies into your app's **build.gradle**
     ```
-    compile 'com.google.android.gms:play-services-wallet:11.4.2'
+    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.google.android.gms:play-services-wallet:16.0.0'
     ```
 3. Add below metadata in AndroidManifest.xml
     ```xml
@@ -89,6 +90,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     ```
     TPDMerchant tpdMerchant = new TPDMerchant();
     tpdMerchant.setSupportedNetworks(allowedNetworks);
+    tpdMerchant.setMerchantName("Your merchant name");
     ```
     - TPDConsumer for requiring consumer's payment detail.
     ```
@@ -98,19 +100,19 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     tpdConsumer.setEmailRequired(true);
     ```
 
-6. Setup TPDPayWithGoogle with TPDMerchant and TPDConsumer.
+6. Setup TPDGooglePay with TPDMerchant and TPDConsumer.
     ```Java
-    TPDPayWithGoogle tpdPayWithGoogle = new TPDPayWithGoogle(this, tpdMerchant, tpdConsumer);
+    TPDGooglePay tpdGooglePay = new TPDGooglePay(this, tpdMerchant, tpdConsumer);
     ```
 
 7. Check Google Pay availability.
     ```
-    tpdPayWithGoogle.canUserPayWithGoogle(TPDPayWithGoogleListener var1);
+    tpdGooglePay.isGooglePayAvailable(TPDGooglePayListener var1);
     ```
 
 8. Obtain PaymentData.
     ```
-    tpdPayWithGoogle.requestPayment(TransactionInfo.newBuilder()
+    tpdGooglePay.requestPayment(TransactionInfo.newBuilder()
                     .setTotalPriceStatus(WalletConstants.TOTAL_PRICE_STATUS_FINAL)
                     .setTotalPrice("1")
                     .setCurrencyCode("TWD")
@@ -119,7 +121,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     
 9. Get Prime from TapPay.
     ```
-     tpdPayWithGoogle.getPrime(paymentData, TPDTokenSuccessCallback, TPDTokenFailureCallback);
+     tpdGooglePay.getPrime(paymentData, TPDTokenSuccessCallback, TPDTokenFailureCallback);
     ```
     
     
