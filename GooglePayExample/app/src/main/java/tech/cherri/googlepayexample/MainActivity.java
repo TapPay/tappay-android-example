@@ -221,7 +221,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onFailure (int status, String reportMsg) {
         hideProgressDialog();
         showMessage("TapPay getPrime failed , status = " + status + ", msg : " + reportMsg);
-        Log.d("TPDirect createToken", "failure : " + status + ", msg : " + reportMsg);
+        Log.d(TAG, "TapPay getPrime failed : " + status + ", msg : " + reportMsg);
     }
 
     private void showMessage (String s) {
