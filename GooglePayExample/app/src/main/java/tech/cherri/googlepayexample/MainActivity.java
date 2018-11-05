@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             , TPDCard.CardType.MasterCard
             , TPDCard.CardType.JCB
             , TPDCard.CardType.AmericanExpress};
+    private TPDCard.AuthMethod[] allowedAuthMethods = new TPDCard.AuthMethod[]{TPDCard.AuthMethod.PanOnly,
+            TPDCard.AuthMethod.Cryptogram3DS};
     private static final int REQUEST_READ_PHONE_STATE = 101;
     private static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 102;
     private TPDGooglePay tpdGooglePay;
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TPDMerchant tpdMerchant = new TPDMerchant();
         tpdMerchant.setSupportedNetworks(allowedNetworks);
         tpdMerchant.setMerchantName(getString(R.string.test_merchant_name));
+        tpdMerchant.setSupportedAuthMethods(allowedAuthMethods);
 
         TPDConsumer tpdConsumer = new TPDConsumer();
         tpdConsumer.setPhoneNumberRequired(false);
