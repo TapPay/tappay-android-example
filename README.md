@@ -221,7 +221,7 @@ TPDLinePayResult has:
     ```
 3. Use TPDSetup to initialize the SDK and setup environment.
     ```Java
-    TPDSetup.initInstance({Your Activity}, "APP_ID", "APP_KEY"
+    TPDSetup.initInstance(getApplicationContext(), "APP_ID", "APP_KEY"
     , TPDServerType.Sandbox);
     ```
 
@@ -236,7 +236,7 @@ TPDLinePayResult has:
     ```
 5. Setup TPDSamsungPay with TPDMerchant and service Id
     ```Java
-    TPDSamsungPay tpdSamsungPay = new TPDSamsungPay(Context context, "Your serviceId obtained from Samsung", tpdMerchant);
+    TPDSamsungPay tpdSamsungPay = new TPDSamsungPay({Your Activity}, "Your serviceId obtained from Samsung", tpdMerchant);
     ```
 
 6. Check Samsung Pay availability.
