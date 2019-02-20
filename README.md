@@ -221,7 +221,7 @@ TPDLinePayResult has:
     ```
 3. Use TPDSetup to initialize the SDK and setup environment.
     ```Java
-    TPDSetup.initInstance(getApplicationContext(), "APP_ID", "APP_KEY"
+    TPDSetup.initInstance({Your Activity}, "APP_ID", "APP_KEY"
     , TPDServerType.Sandbox);
     ```
 

@@ -7,8 +7,8 @@ android {
         applicationId 'tech.cherri.googlepayexample'
         minSdkVersion 15
         targetSdkVersion 26
-        versionCode 12
-        versionName "2.2.4.7"
+        versionCode 13
+        versionName "2.2.4.8"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
