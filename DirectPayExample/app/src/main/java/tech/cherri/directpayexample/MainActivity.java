@@ -22,9 +22,9 @@ import tech.cherri.tpdirect.api.TPDCardInfo;
 import tech.cherri.tpdirect.api.TPDForm;
 import tech.cherri.tpdirect.api.TPDServerType;
 import tech.cherri.tpdirect.api.TPDSetup;
+import tech.cherri.tpdirect.callback.TPDCardTokenSuccessCallback;
 import tech.cherri.tpdirect.callback.TPDFormUpdateListener;
 import tech.cherri.tpdirect.callback.TPDTokenFailureCallback;
-import tech.cherri.tpdirect.callback.TPDTokenSuccessCallback;
 import tech.cherri.tpdirect.model.TPDStatus;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -115,13 +115,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //3.Setup TPDCard with form and callbacks.
-        TPDTokenSuccessCallback tpdTokenSuccessCallback = new TPDTokenSuccessCallback() {
+        TPDCardTokenSuccessCallback tpdTokenSuccessCallback = new TPDCardTokenSuccessCallback() {
             @Override
-            public void onSuccess(String token, TPDCardInfo tpdCardInfo) {
+            public void onSuccess(String token, TPDCardInfo tpdCardInfo, String cardIdentifier) {
                 String cardLastFour = tpdCardInfo.getLastFour();
 
                 Log.d("TPDirect createToken", "token:  " + token);
                 Log.d("TPDirect createToken", "cardLastFour:  " + cardLastFour);
+                Log.d("TPDirect createToken", "cardIdentifier:  " + cardIdentifier);
 
                 Toast.makeText(MainActivity.this,
                         "Create Token Success",
