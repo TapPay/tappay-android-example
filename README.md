@@ -248,3 +248,82 @@ TPDLinePayResult has:
     ```
     tpdSamsungPay.getPrime(itemTotalAmount, shippingPrice, tax, totalAmount, TPDTokenSuccessCallback, TPDTokenFailureCallback);
     ```
+
+## JKOPAY
+
+1. Import tpdirect.aar into your project.
+2. Use TPDSetup to initialize the SDK and setup environment.
+``` android
+TPDSetup.initInstance(getApplicationContext(),
+                Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
+```
+3. Add below intent-filter to an Activity for receiving JKO Pay Result with App Link in AndroidManifest.xml and set launch mode to "SingleTask"
+
+For example :
+``` xml
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTask">
+
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data
+            android:host="your host"
+            android:pathPattern="/your path"
+            android:scheme="https" />
+
+    </intent-filter>
+</activity>
+```
+4. Check JKO Pay availability.
+
+boolean isJkoPayAvailable = TPDJkoPay.isJkoPayAvailable(this.getApplicationContext());
+
+5. Setup TPDJkoPay with universal links (both declared in Step3)
+For example:
+``` android
+TPDJkoPay tpdJkoPay = new TPDJkoPay(getApplicationContext(), "your universal links");
+```
+
+6.  Open corresponding LinePay payment method by paymentUrl obtained from TapPay pay-by-prime API
+``` android
+tpdJkoPay.redirectWithUrl(paymentUrl);
+```
+
+7. Receive JkoPayResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
+
+``` android
+tpdJkoPay.parseToJkoPayResult(getApplicationContext(), intent.getData(), TPDJkoPayResultListener listener)
+```
+
+8. Obtain TPDJkoPayResult in "onParseSuccess" TPDJkoPayResult has:
+``` android
+status
+recTradeId
+bankTransactionId
+orderNumber
+```
+
+## Setup App Link
+
+1. Setup a config need to use an API return JSON string, API path https://"your host"/"your path"  (both declared in Step3)
+JSON string For example:
+```
+[{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "your package name",
+    "sha256_cert_fingerprints":
+    ["your sha256_cert_fingerprints"]
+  }
+}]
+```
+
+2. How to get JSON string?
+![](Pic/app-links-1.png)
+![](Pic/app-links-2.png)
