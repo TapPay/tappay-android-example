@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tech.cherri.jkospayexample">
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="11111111.ngrok.io"
+                    android:pathPattern="/test"
+                    android:scheme="http" />
+                <data
+                    android:host="11111111.ngrok.io"
+                    android:pathPattern="/test"
+                    android:scheme="https" />
+
+                <data
+                    android:host="jko.app"
+                    android:scheme="jkoexample" />
+            </intent-filter>
+
+        </activity>
+    </application>
+</manifest>
