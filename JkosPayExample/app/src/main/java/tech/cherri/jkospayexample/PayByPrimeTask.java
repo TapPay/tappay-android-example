@@ -130,9 +130,9 @@ public class PayByPrimeTask extends AsyncTask<JSONObject, Void, JSONObject> {
                 if (json.getInt("status") == 0) {
                     String paymentUrl = json.getString("payment_url");
                     mainActivity.paymentUrl = paymentUrl;
-                    mainActivity.showMessage("Payment Url：" + paymentUrl);
+                    mainActivity.showMessage("Payment Url：" + paymentUrl+"\n");
                 } else {
-                    mainActivity.showMessage("Pay by prime error with status: " + json.getInt("status") + ", msg: " + json.getString("msg"));
+                    mainActivity.showMessage("Pay by prime error with status: " + json.getInt("status") + ", msg: " + json.getString("msg")+"\n");
                 }
             } else {
                 mainActivity.showMessage("Network error with httpRespondCode：" + httpRespondCode);
