@@ -325,5 +325,7 @@ JSON string For example:
 ```
 
 2. How to get JSON string?
+
+
 ![](Pic/app-links-1.png)
 ![](Pic/app-links-2.png)
