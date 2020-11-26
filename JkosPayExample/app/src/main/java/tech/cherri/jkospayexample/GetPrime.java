@@ -3,12 +3,11 @@ package tech.cherri.jkospayexample;
 import android.util.Log;
 import android.view.View;
 
-import tech.cherri.tpdirect.api.TPDCardInfo;
 import tech.cherri.tpdirect.api.TPDJkoPay;
-import tech.cherri.tpdirect.callback.TPDTokenFailureCallback;
-import tech.cherri.tpdirect.callback.TPDTokenSuccessCallback;
+import tech.cherri.tpdirect.callback.TPDGetPrimeFailureCallback;
+import tech.cherri.tpdirect.callback.TPDJkoPayGetPrimeSuccessCallback;
 
-public class GetPrime implements View.OnClickListener, TPDTokenFailureCallback, TPDTokenSuccessCallback {
+public class GetPrime implements View.OnClickListener, TPDGetPrimeFailureCallback, TPDJkoPayGetPrimeSuccessCallback {
 
     private MainActivity mainActivity;
     private TPDJkoPay tpdJkoPay;
@@ -20,24 +19,19 @@ public class GetPrime implements View.OnClickListener, TPDTokenFailureCallback, 
 
     @Override
     public void onClick(View view) {
-        if (tpdJkoPay != null) {
-            Log.i("GetPrime", "tpdJkoPay != null");
-            tpdJkoPay.getPrime(this, this);
-        }else{
-            Log.i("GetPrime", "tpdJkoPay == null");
-        }
+        tpdJkoPay.getPrime(this, this);
     }
 
     @Override
-    public void onSuccess(String prime, TPDCardInfo cardInfo) {
+    public void onSuccess(String prime) {
         mainActivity.hideProgressDialog();
         mainActivity.showMessage("Prime：" + prime + "\n");
         mainActivity.prime = prime;
     }
 
     @Override
-    public void onFailure(int status, String reportMsg) {
+    public void onFailure(int status, String msg) {
         mainActivity.hideProgressDialog();
-        mainActivity.showMessage("GetPrime failed , status = " + status + ", msg : " + reportMsg);
+        mainActivity.showMessage("GetPrime failed , status = " + status + ", msg : " + msg);
     }
 }

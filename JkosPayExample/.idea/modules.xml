@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/JkosPayExample.iml" filepath="$PROJECT_DIR$/.idea/JkosPayExample.iml" group="JkosPayExample" />
-      <module fileurl="file://$PROJECT_DIR$/app/JkosPayExample-app.iml" filepath="$PROJECT_DIR$/app/JkosPayExample-app.iml" group="JkosPayExample/app" />
-      <module fileurl="file://$PROJECT_DIR$/android-sdk-JkosPayExample.iml" filepath="$PROJECT_DIR$/android-sdk-JkosPayExample.iml" group="JkosPayExample" />
+      <module fileurl="file://$PROJECT_DIR$/JkosPayExample.iml" filepath="$PROJECT_DIR$/JkosPayExample.iml" group="JkosPayExample" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="JkosPayExample/app" />
     </modules>
   </component>

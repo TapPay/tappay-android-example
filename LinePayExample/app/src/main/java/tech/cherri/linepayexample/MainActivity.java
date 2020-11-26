@@ -17,17 +17,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import tech.cherri.tpdirect.api.TPDCardInfo;
 import tech.cherri.tpdirect.api.TPDLinePay;
 import tech.cherri.tpdirect.api.TPDLinePayResult;
 import tech.cherri.tpdirect.api.TPDServerType;
 import tech.cherri.tpdirect.api.TPDSetup;
+import tech.cherri.tpdirect.callback.TPDGetPrimeFailureCallback;
+import tech.cherri.tpdirect.callback.TPDLinePayGetPrimeSuccessCallback;
 import tech.cherri.tpdirect.callback.TPDLinePayResultListener;
-import tech.cherri.tpdirect.callback.TPDTokenFailureCallback;
-import tech.cherri.tpdirect.callback.TPDTokenSuccessCallback;
 import tech.cherri.tpdirect.exception.TPDLinePayException;
 
-public class MainActivity extends AppCompatActivity implements TPDTokenFailureCallback, TPDTokenSuccessCallback, View.OnClickListener, TPDLinePayResultListener {
+public class MainActivity extends AppCompatActivity implements TPDGetPrimeFailureCallback, TPDLinePayGetPrimeSuccessCallback, View.OnClickListener, TPDLinePayResultListener {
     private static final String TAG = "MainActivity";
     private static final int REQUEST_READ_PHONE_STATE = 101;
     private RelativeLayout linePayBTN;
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
 
         //Setup environment.
         TPDSetup.initInstance(getApplicationContext(),
-                Integer.parseInt(getString(R.string.global_test_app_id)), getString(R.string.global_test_app_key), TPDServerType.Sandbox);
+                Constants.APP_ID, Constants.APP_KEY, Constants.SERVER_TYPE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions();
@@ -71,15 +70,15 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-            switch (requestCode) {
-                case REQUEST_READ_PHONE_STATE:
-                    if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                        Log.d(TAG, "PERMISSION_GRANTED");
-                    }
-                    prepareLinePay();
-                    break;
-                default:
-                    break;
+        switch (requestCode) {
+            case REQUEST_READ_PHONE_STATE:
+                if ((grantResults.length > 0) && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                    Log.d(TAG, "PERMISSION_GRANTED");
+                }
+                prepareLinePay();
+                break;
+            default:
+                break;
         }
     }
 
@@ -87,13 +86,13 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
         boolean isLinePayAvailable = TPDLinePay.isLinePayAvailable(this.getApplicationContext());
         Toast.makeText(this, "isLinePayAvailable : "
                 + isLinePayAvailable, Toast.LENGTH_SHORT).show();
-        if(isLinePayAvailable){
+        if (isLinePayAvailable) {
             try {
-                tpdLinePay = new TPDLinePay(getApplicationContext(), AppConstants.TAPPAY_LINEPAY_RESULT_CALLBACK_URI);
+                tpdLinePay = new TPDLinePay(getApplicationContext(), Constants.TAPPAY_LINEPAY_RESULT_CALLBACK_URI);
             } catch (TPDLinePayException e) {
                 showMessage(e.getMessage());
             }
-        }else{
+        } else {
             linePayBTN.setEnabled(false);
         }
     }
@@ -116,13 +115,13 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
 
 
     @Override
-    public void onSuccess(String prime, TPDCardInfo cardInfo) {
+    public void onSuccess(String prime) {
         hideProgressDialog();
         String resultStr = "Your prime is " + prime
                 + "\n\nUse below cURL to get payment url with Pay-by-Prime API on your server side: \n"
                 + ApiUtil.generatePayByPrimeCURLForSandBox(prime,
-                getString(R.string.global_test_partnerKey),
-                getString(R.string.global_test_merchant_id));
+                Constants.PARTNER_KEY,
+                Constants.MERCHANT_ID);
 
         showMessage(resultStr);
         Log.d(TAG, resultStr);
@@ -140,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
     }
 
     private void handleIncomingIntent(Intent intent) {
-        if(intent.getDataString() != null && intent.getDataString().contains(AppConstants.TAPPAY_LINEPAY_RESULT_CALLBACK_URI)){
+        if (intent.getDataString() != null && intent.getDataString().contains(Constants.TAPPAY_LINEPAY_RESULT_CALLBACK_URI)) {
             if (tpdLinePay == null) {
                 prepareLinePay();
             }
@@ -151,9 +150,9 @@ public class MainActivity extends AppCompatActivity implements TPDTokenFailureCa
     }
 
     @Override
-    public void onFailure(int status, String reportMsg) {
+    public void onFailure(int status, String msg) {
         hideProgressDialog();
-        showMessage("GetPrime failed , status = "+ status + ", msg : " + reportMsg);
+        showMessage("GetPrime failed , status = " + status + ", msg : " + msg);
     }
 
     private void showMessage(String s) {

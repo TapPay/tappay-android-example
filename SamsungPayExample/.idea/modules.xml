@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SamsungPayExample.iml" filepath="$PROJECT_DIR$/SamsungPayExample.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SamsungPayExample.iml" filepath="$PROJECT_DIR$/SamsungPayExample.iml" group="SamsungPayExample" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="SamsungPayExample/app" />
     </modules>
   </component>
 </project>

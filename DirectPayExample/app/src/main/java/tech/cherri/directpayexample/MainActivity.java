@@ -17,15 +17,19 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.FormatFlagsConversionMismatchException;
+
 import tech.cherri.tpdirect.api.TPDCard;
-import tech.cherri.tpdirect.api.TPDCardInfo;
 import tech.cherri.tpdirect.api.TPDForm;
 import tech.cherri.tpdirect.api.TPDServerType;
 import tech.cherri.tpdirect.api.TPDSetup;
-import tech.cherri.tpdirect.callback.TPDCardTokenSuccessCallback;
+import tech.cherri.tpdirect.callback.TPDCardGetPrimeSuccessCallback;
 import tech.cherri.tpdirect.callback.TPDFormUpdateListener;
-import tech.cherri.tpdirect.callback.TPDTokenFailureCallback;
+import tech.cherri.tpdirect.callback.TPDGetPrimeFailureCallback;
+import tech.cherri.tpdirect.callback.dto.TPDCardInfoDto;
+import tech.cherri.tpdirect.callback.dto.TPDMerchantReferenceInfoDto;
 import tech.cherri.tpdirect.model.TPDStatus;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -93,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "startTapPaySetting");
         //1.Setup environment.
         TPDSetup.initInstance(getApplicationContext(),
-                Integer.parseInt(getString(R.string.global_test_app_id)), getString(R.string.global_test_app_key), TPDServerType.Sandbox);
+                Constants.APP_ID, Constants.APP_KEY, Constants.SERVER_TYPE);
 
         //2.Setup input form
         tpdForm = (TPDForm) findViewById(R.id.tpdCardInputForm);
@@ -115,43 +119,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //3.Setup TPDCard with form and callbacks.
-        TPDCardTokenSuccessCallback tpdTokenSuccessCallback = new TPDCardTokenSuccessCallback() {
+        TPDCardGetPrimeSuccessCallback tpdCardGetPrimeSuccessCallback = new TPDCardGetPrimeSuccessCallback() {
             @Override
-            public void onSuccess(String token, TPDCardInfo tpdCardInfo, String cardIdentifier) {
-                String cardLastFour = tpdCardInfo.getLastFour();
+            public void onSuccess(String prime, TPDCardInfoDto cardInfo, String cardIdentifier, TPDMerchantReferenceInfoDto merchantReferenceInfo) {
 
-                Log.d("TPDirect createToken", "token:  " + token);
-                Log.d("TPDirect createToken", "cardLastFour:  " + cardLastFour);
-                Log.d("TPDirect createToken", "cardIdentifier:  " + cardIdentifier);
+                Log.d("TPDirect getPrime", "prime:  " + prime);
+                Log.d("TPDirect getPrime", "cardInfo:  " + cardInfo);
+                Log.d("TPDirect getPrime", "cardIdentifier:  " + cardIdentifier);
+                Log.d("TPDirect getPrime", "merchantReferenceInfo:  " + merchantReferenceInfo);
 
                 Toast.makeText(MainActivity.this,
-                        "Create Token Success",
+                        "Get Prime Success",
                         Toast.LENGTH_SHORT).show();
 
-                String resultStr = "Your prime is " + token
-                        + "\n\nUse below cURL to proceed the payment : \n"
-                        + ApiUtil.generatePayByPrimeCURLForSandBox(token,
-                        getString(R.string.global_test_partnerKey),
-                        getString(R.string.global_test_merchant_id));
+                String resultStr = "prime is " + prime + "\n\n" +
+                        "cardInfo is " + cardInfo + "\n\n" +
+                        "cardIdentifier is " + cardIdentifier + "\n\n" +
+                        "merchantReferenceInfo is " + merchantReferenceInfo + "\n\n" +
+                        "Use below cURL to proceed the payment : \n"
+                        + ApiUtil.generatePayByPrimeCURLForSandBox(prime, Constants.PARTNER_KEY,
+                        Constants.MERCHANT_ID);
 
                 statusTV.setText(resultStr);
                 Log.d(TAG, resultStr);
 
             }
         };
-        TPDTokenFailureCallback tpdTokenFailureCallback = new TPDTokenFailureCallback() {
+        TPDGetPrimeFailureCallback tpdGetPrimeFailureCallback = new TPDGetPrimeFailureCallback() {
             @Override
-            public void onFailure(int status, String reportMsg) {
-                Log.d("TPDirect createToken", "failure: " + status + reportMsg);
+            public void onFailure(int status, String msg) {
+                Log.d("TPDirect createToken", "failure: " + status + ": " + msg);
                 Toast.makeText(MainActivity.this,
-                        "Create Token Failed\n" + status + ": " + reportMsg,
+                        "Create Token Failed\n" + status + ": " + msg,
                         Toast.LENGTH_SHORT).show();
             }
         };
 
-        tpdCard = TPDCard.setup(tpdForm).onSuccessCallback(tpdTokenSuccessCallback)
-                .onFailureCallback(tpdTokenFailureCallback);
-
+        tpdCard = TPDCard.setup(tpdForm).onSuccessCallback(tpdCardGetPrimeSuccessCallback)
+                .onFailureCallback(tpdGetPrimeFailureCallback);
 
         //For getFraudId
         getFraudIdBTN = (Button) findViewById(R.id.getFraudIdBTN);

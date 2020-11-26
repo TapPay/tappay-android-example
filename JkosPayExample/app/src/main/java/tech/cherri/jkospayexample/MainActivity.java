@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Setup environment.
         TPDSetup.initInstance(getApplicationContext(),
-                Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
+                Constants.APP_ID, Constants.APP_KEY, Constants.SERVER_TYPE);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions();

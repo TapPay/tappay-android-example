@@ -24,16 +24,16 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="11111111.ngrok.io"
+                    android:host="jko.universal-links.com"
                     android:pathPattern="/test"
                     android:scheme="http" />
                 <data
-                    android:host="11111111.ngrok.io"
+                    android:host="jko.universal-links.com"
                     android:pathPattern="/test"
                     android:scheme="https" />
 
                 <data
-                    android:host="jko.app"
+                    android:host="jko.uri"
                     android:port="8888"
                     android:path="/"
                     android:scheme="jkoexample" />

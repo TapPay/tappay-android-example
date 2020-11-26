@@ -4,14 +4,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-
 public class ApiUtil {
-    public static String generatePayByPrimeCURLForSandBox(String prime, String partnerKey, String merchantId){
-        StringBuilder stringBuilder  = new StringBuilder();
+    public static String generatePayByPrimeCURLForSandBox(String prime, String partnerKey, String merchantId) {
+        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("curl -X POST ");
-        stringBuilder.append(AppConstants.TAPPAY_DOMAIN_SANDBOX + AppConstants.TAPPAY_PAY_BY_PRIME_URL);
+        stringBuilder.append(Constants.TAPPAY_DOMAIN + Constants.TAPPAY_PAY_BY_PRIME_URL);
         stringBuilder.append(" -H 'content-type: application/json' ");
-        stringBuilder.append(" -H 'x-api-key: "+ partnerKey +"' ");
+        stringBuilder.append(" -H 'x-api-key: " + partnerKey + "' ");
         stringBuilder.append(" -d '");
 
         JSONObject bodyJO = new JSONObject();

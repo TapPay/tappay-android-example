@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/merchantId"
             android:layout_marginTop="10dp"
-            android:text="https://11111111.ngrok.io/test" />
+            android:text="https://jko.universal-links.com/test" />
 
         <Button
             android:id="@+id/jkosPayGetPrimeBTN"
@@ -90,7 +90,7 @@
             android:layout_below="@id/totalAmountTV"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/merchantId"
-            android:text="JKO.TEST" />
+            android:text="GlobalTesting_JKOPAY" />
 
         <TextView
             android:id="@+id/getPrimeResultStateTV"
