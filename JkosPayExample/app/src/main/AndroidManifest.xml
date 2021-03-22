@@ -35,7 +35,7 @@
                 <data
                     android:host="jko.uri"
                     android:port="8888"
-                    android:path="/"
+                    android:path="/test"
                     android:scheme="jkoexample" />
             </intent-filter>
 
