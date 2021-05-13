@@ -18,14 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import tech.cherri.tpdirect.api.TPDCard;
+import tech.cherri.tpdirect.api.TPDCcv;
+import tech.cherri.tpdirect.api.TPDCcvForm;
 import tech.cherri.tpdirect.api.TPDForm;
 import tech.cherri.tpdirect.api.TPDSetup;
 import tech.cherri.tpdirect.callback.TPDCardGetPrimeSuccessCallback;
+import tech.cherri.tpdirect.callback.TPDCcvFormUpdateListener;
+import tech.cherri.tpdirect.callback.TPDCcvGetPrimeSuccessCallback;
 import tech.cherri.tpdirect.callback.TPDFormUpdateListener;
 import tech.cherri.tpdirect.callback.TPDGetPrimeFailureCallback;
 import tech.cherri.tpdirect.callback.dto.TPDCardInfoDto;
 import tech.cherri.tpdirect.callback.dto.TPDMerchantReferenceInfoDto;
-import tech.cherri.tpdirect.constant.TPDConstants;
+import tech.cherri.tpdirect.model.TPDCcvStatus;
 import tech.cherri.tpdirect.model.TPDStatus;
 
 
@@ -35,11 +39,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final int REQUEST_READ_PHONE_STATE = 101;
 
     private TPDForm tpdForm;
+    private TPDCcvForm tpdCcvForm;
     private TextView tipsTV;
     private Button payBTN;
     private TPDCard tpdCard;
+    private TPDCcv tpdCcv;
     private TextView statusTV;
     private Button getDeviceIdBTN;
+    private Button getCcvPrimeBTN;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +69,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         payBTN = (Button) findViewById(R.id.payBTN);
         payBTN.setOnClickListener(this);
         payBTN.setEnabled(false);
+
+        getCcvPrimeBTN = (Button) findViewById(R.id.getCcvPrimeBTN);
+        getCcvPrimeBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tpdCcv.getPrime();
+            }
+        });
+        getCcvPrimeBTN.setEnabled(false);
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -94,11 +110,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void startTapPaySetting() {
         Log.d(TAG, "startTapPaySetting");
         //1.Setup environment.
-//        TPDSetup.initInstance(getApplicationContext(),
-//                Constants.APP_ID, Constants.APP_KEY, Constants.SERVER_TYPE);
 
-        TPDSetup.initInstanceWithRba(getApplicationContext(),
-                Constants.APP_ID, Constants.APP_KEY, Constants.RBA_APP_ID, Constants.RBA_APP_KEY, Constants.SERVER_TYPE);
+        TPDSetup.initInstance(getApplicationContext(),
+                Constants.APP_ID, Constants.APP_KEY, Constants.SERVER_TYPE);
+
+//        TPDSetup.initInstanceWithRba(getApplicationContext(),
+//                Constants.APP_ID, Constants.APP_KEY, Constants.RBA_APP_ID, Constants.RBA_APP_KEY, Constants.SERVER_TYPE);
 
         //2.Setup input form
         tpdForm = (TPDForm) findViewById(R.id.tpdCardInputForm);
@@ -159,9 +176,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tpdCard = TPDCard.setup(tpdForm).onSuccessCallback(tpdCardGetPrimeSuccessCallback)
                 .onFailureCallback(tpdGetPrimeFailureCallback);
 
-        //For getFraudId
+        //For getDeviceId
         getDeviceIdBTN = (Button) findViewById(R.id.getDeviceIdBTN);
         getDeviceIdBTN.setOnClickListener(this);
+
+        //For getCcvPrime
+
+        tpdCcvForm = (TPDCcvForm) findViewById(R.id.tpdCcvInputForm);
+        tpdCcvForm.setTextErrorColor(Color.RED);
+        tpdCcvForm.setOnFormUpdateListener(new TPDCcvFormUpdateListener() {
+            @Override
+            public void onFormUpdated(TPDCcvStatus tpdCcvStatus) {
+                tipsTV.setText("");
+                if (tpdCcvStatus.getCcvStatus() == TPDCcvStatus.Status.ERROR) {
+                    tipsTV.setText("Invalid CCV");
+                }
+                getCcvPrimeBTN.setEnabled(tpdCcvStatus.isCanGetPrime());
+            }
+        });
+
+
+        TPDCcvGetPrimeSuccessCallback tpdCcvGetPrimeSuccessCallback = new TPDCcvGetPrimeSuccessCallback() {
+
+            @Override
+            public void onSuccess(String ccvPrime) {
+
+                Log.d("TPDirect ccvPrime", "prime:  " + ccvPrime);
+
+                Toast.makeText(MainActivity.this,
+                        "Get Ccv Prime Success",
+                        Toast.LENGTH_SHORT).show();
+
+                String resultStr = "ccv prime is " + ccvPrime + "\n\n";
+
+                statusTV.setText(resultStr);
+                Log.d(TAG, resultStr);
+
+            }
+        };
+        TPDGetPrimeFailureCallback tpdGetCcvPrimeFailureCallback = new TPDGetPrimeFailureCallback() {
+            @Override
+            public void onFailure(int status, String msg) {
+                Log.d("TPDirect Get Ccv Prime", "failure: " + status + ": " + msg);
+                Toast.makeText(MainActivity.this,
+                        "Get Ccv Prime Failed\n" + status + ": " + msg,
+                        Toast.LENGTH_SHORT).show();
+            }
+        };
+
+        tpdCcv = TPDCcv.setup(tpdCcvForm).onSuccessCallback(tpdCcvGetPrimeSuccessCallback)
+                .onFailureCallback(tpdGetCcvPrimeFailureCallback);
     }
 
 
@@ -175,6 +239,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.payBTN:
                 //4. Calling API for obtaining prime.
+                if (tpdCard != null) {
+                    tpdCard.getPrime();
+                }
+                break;
+            case R.id.getCcvPrimeBTN:
                 if (tpdCard != null) {
                     tpdCard.getPrime();
                 }

@@ -23,8 +23,6 @@ import android.widget.Toast;
 
 import tech.cherri.tpdirect.api.TPDEasyWallet;
 import tech.cherri.tpdirect.api.TPDEasyWalletResult;
-import tech.cherri.tpdirect.api.TPDJkoPay;
-import tech.cherri.tpdirect.api.TPDServerType;
 import tech.cherri.tpdirect.api.TPDSetup;
 import tech.cherri.tpdirect.callback.TPDEasyWalletResultListener;
 import tech.cherri.tpdirect.exception.TPDEasyWalletException;
