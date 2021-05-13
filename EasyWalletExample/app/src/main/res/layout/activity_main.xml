@@ -21,7 +21,7 @@
             android:id="@+id/easyWalletGetPrimeBTN"
             android:layout_width="200dp"
             android:layout_height="48dp"
-            android:layout_below="@id/urlInput"
+            android:layout_below="@id/paymentUrlInput"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="Easy Wallet Get Prime" />
@@ -48,7 +48,7 @@
             android:id="@+id/refreshBTN"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_below="@id/urlInput"
+            android:layout_below="@id/paymentUrlInput"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="30dp"
             android:layout_marginTop="20dp"
@@ -61,7 +61,15 @@
             android:layout_height="match_parent"
             android:layout_below="@id/merchantId"
             android:layout_marginTop="10dp"
-            android:text="https://ew.universal-links.com/test" />
+            android:text="ewexample://ew.app:8888/test" />
+
+        <EditText
+            android:id="@+id/paymentUrlInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/urlInput"
+            android:layout_marginTop="10dp"
+            android:text="https://google.com.tw" />
 
         <EditText
             android:id="@+id/merchantIdInput"
@@ -72,7 +80,7 @@
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/merchantId"
             android:singleLine="true"
-            android:text="GlobalTesting_EASY_WALLET" />
+            android:text="ew.test" />
 
         <TextView
             android:id="@+id/totalAmountTV"

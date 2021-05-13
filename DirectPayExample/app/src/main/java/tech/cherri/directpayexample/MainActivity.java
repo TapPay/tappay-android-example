@@ -17,17 +17,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.FormatFlagsConversionMismatchException;
-
 import tech.cherri.tpdirect.api.TPDCard;
 import tech.cherri.tpdirect.api.TPDForm;
-import tech.cherri.tpdirect.api.TPDServerType;
 import tech.cherri.tpdirect.api.TPDSetup;
 import tech.cherri.tpdirect.callback.TPDCardGetPrimeSuccessCallback;
 import tech.cherri.tpdirect.callback.TPDFormUpdateListener;
 import tech.cherri.tpdirect.callback.TPDGetPrimeFailureCallback;
 import tech.cherri.tpdirect.callback.dto.TPDCardInfoDto;
 import tech.cherri.tpdirect.callback.dto.TPDMerchantReferenceInfoDto;
+import tech.cherri.tpdirect.constant.TPDConstants;
 import tech.cherri.tpdirect.model.TPDStatus;
 
 
@@ -41,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button payBTN;
     private TPDCard tpdCard;
     private TextView statusTV;
-    private Button getFraudIdBTN;
+    private Button getDeviceIdBTN;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,8 +94,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void startTapPaySetting() {
         Log.d(TAG, "startTapPaySetting");
         //1.Setup environment.
-        TPDSetup.initInstance(getApplicationContext(),
-                Constants.APP_ID, Constants.APP_KEY, Constants.SERVER_TYPE);
+//        TPDSetup.initInstance(getApplicationContext(),
+//                Constants.APP_ID, Constants.APP_KEY, Constants.SERVER_TYPE);
+
+        TPDSetup.initInstanceWithRba(getApplicationContext(),
+                Constants.APP_ID, Constants.APP_KEY, Constants.RBA_APP_ID, Constants.RBA_APP_KEY, Constants.SERVER_TYPE);
 
         //2.Setup input form
         tpdForm = (TPDForm) findViewById(R.id.tpdCardInputForm);
@@ -159,18 +160,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .onFailureCallback(tpdGetPrimeFailureCallback);
 
         //For getFraudId
-        getFraudIdBTN = (Button) findViewById(R.id.getFraudIdBTN);
-        getFraudIdBTN.setOnClickListener(this);
+        getDeviceIdBTN = (Button) findViewById(R.id.getDeviceIdBTN);
+        getDeviceIdBTN.setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.getFraudIdBTN:
+            case R.id.getDeviceIdBTN:
                 //GetFraudId for PayByToken
-                String fraudId = TPDSetup.getInstance(this).getFraudId();
-                Toast.makeText(this, "FraudId is:" + fraudId, Toast.LENGTH_SHORT).show();
+                String deviceId = TPDSetup.getInstance(this).getRbaDeviceId();
+                Toast.makeText(this, "DeviceId is:" + deviceId, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.payBTN:
                 //4. Calling API for obtaining prime.

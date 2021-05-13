@@ -35,7 +35,7 @@
                 <data
                     android:host="ew.app"
                     android:port="8888"
-                    android:path="/"
+                    android:path="/test"
                     android:scheme="ewexample" />
             </intent-filter>
 

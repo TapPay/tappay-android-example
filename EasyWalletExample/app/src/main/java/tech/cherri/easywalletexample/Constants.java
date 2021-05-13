@@ -11,8 +11,8 @@ public class Constants {
     public static final String FRONTEND_REDIRECT_URL_EXAMPLE = "https://example.com/front-end-redirect";
     public static final String BACKEND_NOTIFY_URL_EXAMPLE = "https://example.com/back-end-notify";
 
-    public static final String PARTNER_KEY = "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM";
-    public static final String APP_KEY = "app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC";
-    public static final Integer APP_ID = 11334; // your app id
+    public static final String PARTNER_KEY = "your partner key";
+    public static final String APP_KEY = "your app key";
+    public static final Integer APP_ID = 0; // your app id
 
 }

@@ -46,8 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             , TPDCard.CardType.MasterCard
             , TPDCard.CardType.JCB
             , TPDCard.CardType.AmericanExpress};
-    private TPDCard.AuthMethod[] allowedAuthMethods = new TPDCard.AuthMethod[]{TPDCard.AuthMethod.PanOnly,
-            TPDCard.AuthMethod.Cryptogram3DS};
+    private TPDCard.AuthMethod[] allowedAuthMethods = new TPDCard.AuthMethod[]{TPDCard.AuthMethod.Cryptogram3DS};
     private static final int REQUEST_READ_PHONE_STATE = 101;
     private static final int LOAD_PAYMENT_DATA_REQUEST_CODE = 102;
     private TPDGooglePay tpdGooglePay;
@@ -138,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onReadyToPayChecked(boolean isReadyToPay, String msg) {
-        Log.d(TAG, "Pay with Google availability : " + isReadyToPay);
+        Log.d(TAG, "Pay with Google availability : " + isReadyToPay + ", msg : " + msg);
         if (isReadyToPay) {
             googlePaymentBuyBTN.setEnabled(true);
         } else {

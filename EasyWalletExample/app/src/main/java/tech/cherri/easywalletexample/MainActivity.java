@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView easyWalletResultTV;
     private EditText merchantIdInput;
     private EditText urlInput;
+    private EditText paymentUrlInput;
     private Context context;
 
     private TPDEasyWallet tpdEasyWallet;
@@ -128,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
 
         EditText urlInput = (EditText) findViewById(R.id.urlInput);
         urlInput.addTextChangedListener(textWatcher);
+
+        EditText paymentUrlInput = (EditText) findViewById(R.id.paymentUrlInput);
+        paymentUrlInput.addTextChangedListener(textWatcher);
     }
 
     private void initOnClickListener() {
@@ -138,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                tpdEasyWallet.redirectWithUrl(paymentUrl);
+                tpdEasyWallet.redirectWithUrl(paymentUrl == null ? paymentUrlInput.getText().toString() : paymentUrl);
             }
         });
 
@@ -162,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
         merchantIdInput = (EditText) findViewById(R.id.merchantIdInput);
         urlInput = (EditText) findViewById(R.id.urlInput);
+        paymentUrlInput = (EditText) findViewById(R.id.paymentUrlInput);
         getPrimeResultStateTV = (TextView) findViewById(R.id.getPrimeResultStateTV);
         easyWalletResultTV = (TextView) findViewById(R.id.easyWalletResultTV);
         easyWalletGetPrimeBTN = (Button) findViewById(R.id.easyWalletGetPrimeBTN);
