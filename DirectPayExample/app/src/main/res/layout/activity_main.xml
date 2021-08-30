@@ -72,7 +72,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/getDeviceIdBTN"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"></tech.cherri.tpdirect.api.TPDCcvForm>
+            android:layout_marginTop="10dp">
+        </tech.cherri.tpdirect.api.TPDCcvForm>
 
 
         <tech.cherri.tpdirect.api.TPDForm
@@ -81,6 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/titleTV"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"></tech.cherri.tpdirect.api.TPDForm>
+            android:layout_marginTop="10dp">
+        </tech.cherri.tpdirect.api.TPDForm>
     </RelativeLayout>
 </ScrollView>

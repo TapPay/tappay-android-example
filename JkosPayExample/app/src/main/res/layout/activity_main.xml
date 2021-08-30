@@ -42,7 +42,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/merchantId"
             android:layout_marginTop="10dp"
-            android:text="https://jko.universal-links.com/test" />
+            android:text="jkoexample://jko.uri:8888/test" />
 
         <Button
             android:id="@+id/jkosPayGetPrimeBTN"
