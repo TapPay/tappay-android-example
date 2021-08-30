@@ -8,6 +8,8 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
 >Obtain your app id and keys here.
      https://www.tappaysdk.com/en
 
+## 如需使用 RBA 相關功能
+請將 /DirectPayExample/app/libs/android-A1.0.0.aar 此檔案與 tpdirect.aar 一同放置於 lib 中
 
 # Demo
 ## Direct Pay
