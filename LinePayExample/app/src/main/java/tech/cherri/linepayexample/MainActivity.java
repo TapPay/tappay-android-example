@@ -86,13 +86,15 @@ public class MainActivity extends AppCompatActivity implements TPDGetPrimeFailur
         boolean isLinePayAvailable = TPDLinePay.isLinePayAvailable(this.getApplicationContext());
         Toast.makeText(this, "isLinePayAvailable : "
                 + isLinePayAvailable, Toast.LENGTH_SHORT).show();
-        if (isLinePayAvailable) {
-            try {
+        try {
+            if (isLinePayAvailable) {
                 tpdLinePay = new TPDLinePay(getApplicationContext(), Constants.TAPPAY_LINEPAY_RESULT_CALLBACK_URI);
-            } catch (TPDLinePayException e) {
-                showMessage(e.getMessage());
+                linePayBTN.setEnabled(true);
+            } else {
+                throw new TPDLinePayException("LinePay is not available");
             }
-        } else {
+        } catch (TPDLinePayException e) {
+            showMessage(e.getMessage());
             linePayBTN.setEnabled(false);
         }
     }

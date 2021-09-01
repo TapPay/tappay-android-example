@@ -86,14 +86,18 @@ public class MainActivity extends AppCompatActivity {
         boolean isJkoPayAvailable = TPDJkoPay.isJkoPayAvailable(this.getApplicationContext());
         Toast.makeText(this, "isJkoPayAvailable : "
                 + isJkoPayAvailable, Toast.LENGTH_SHORT).show();
-        if (isJkoPayAvailable) {
-            try {
+        try {
+            if (isJkoPayAvailable) {
                 tpdJkoPay = new TPDJkoPay(getApplicationContext(), urlInput.getText().toString());
                 initOnClickListener();
-            } catch (TPDJkoPayException e) {
-                showMessage(e.getMessage());
+                jkoPayGetPrimeBTN.setEnabled(true);
+                jkoPayPayByPrimeBTN.setEnabled(true);
+                jkoPayRedirectBTN.setEnabled(true);
+            } else {
+                throw new TPDJkoPayException("JkoPay is not available");
             }
-        } else {
+        } catch (TPDJkoPayException e) {
+            showMessage(e.getMessage());
             jkoPayGetPrimeBTN.setEnabled(false);
             jkoPayPayByPrimeBTN.setEnabled(false);
             jkoPayRedirectBTN.setEnabled(false);

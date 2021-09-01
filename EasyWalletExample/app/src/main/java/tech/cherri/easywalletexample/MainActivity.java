@@ -86,18 +86,23 @@ public class MainActivity extends AppCompatActivity {
         boolean isEasyWalletAvailable = TPDEasyWallet.isAvailable(this.getApplicationContext());
         Toast.makeText(this, "isEasyWalletAvailable : "
                 + isEasyWalletAvailable, Toast.LENGTH_SHORT).show();
-        if (isEasyWalletAvailable) {
-            try {
+        try {
+            if (isEasyWalletAvailable) {
                 tpdEasyWallet = new TPDEasyWallet(getApplicationContext(), urlInput.getText().toString());
                 initOnClickListener();
-            } catch (TPDEasyWalletException e) {
-                showMessage(e.getMessage());
+                easyWalletGetPrimeBTN.setEnabled(true);
+                easyWalletPayByPrimeBTN.setEnabled(true);
+                easyWalletRedirectBTN.setEnabled(true);
+            } else {
+                throw new TPDEasyWalletException("EasyWallet is not available");
             }
-        } else {
+        } catch (TPDEasyWalletException e) {
+            showMessage(e.getMessage());
             easyWalletGetPrimeBTN.setEnabled(false);
             easyWalletPayByPrimeBTN.setEnabled(false);
             easyWalletRedirectBTN.setEnabled(false);
         }
+
     }
 
     private void setupInputChangeListner() {
