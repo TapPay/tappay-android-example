@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/GooglePayExample.iml" filepath="$PROJECT_DIR$/GooglePayExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GooglePayExample.iml" filepath="$PROJECT_DIR$/.idea/modules/GooglePayExample.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/GooglePayExample.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/GooglePayExample.app.iml" />
     </modules>
   </component>

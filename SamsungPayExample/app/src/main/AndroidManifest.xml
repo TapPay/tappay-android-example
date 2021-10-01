@@ -25,7 +25,7 @@
         <!--Remove below metadata if in release mode-->
         <meta-data
             android:name="spay_debug_api_key"
-            android:value="6e94611e6daf49c58395aa81faccfd22" />
+            android:value="c6482d4523094c25a9a0cadbaaa0b635" />
 
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -1,6 +1,7 @@
 package tech.cherri.directpayexample;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -234,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.getDeviceIdBTN:
                 //GetFraudId for PayByToken
-                String deviceId = TPDSetup.getInstance(this).getRbaDeviceId();
+                String deviceId = TPDSetup.getInstance(getApplicationContext()).getRbaDeviceId();
                 Toast.makeText(this, "DeviceId is:" + deviceId, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.payBTN:
