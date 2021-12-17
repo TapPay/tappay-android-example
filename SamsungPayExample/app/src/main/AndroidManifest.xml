@@ -27,7 +27,8 @@
             android:name="spay_debug_api_key"
             android:value="c6482d4523094c25a9a0cadbaaa0b635" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
