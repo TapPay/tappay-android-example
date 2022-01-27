@@ -37,4 +37,9 @@
         </activity>
     </application>
 
+    <queries>
+        <package android:name="com.samsung.android.spay" />
+        <package android:name="com.samsung.android.samsungpay.gear" />
+    </queries>
+
 </manifest>

@@ -3,9 +3,15 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 31
     buildToolsVersion "28.0.3"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         applicationId 'tech.cherri.directpayexample'
-        minSdkVersion 15
+        minSdkVersion 18
         targetSdkVersion 31
         versionCode 15
         versionName "2.3.1"
