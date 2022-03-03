@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,7 +26,6 @@ import tech.cherri.tpdirect.callback.TPDAtomePayGetPrimeSuccessCallback;
 import tech.cherri.tpdirect.callback.TPDAtomePayResultListener;
 import tech.cherri.tpdirect.callback.TPDGetPrimeFailureCallback;
 import tech.cherri.tpdirect.exception.TPDAtomePayException;
-import tech.cherri.tpdirect.utils.SDKLog;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         TPDAtomePayGetPrimeSuccessCallback, TPDGetPrimeFailureCallback, ResultListener, TPDAtomePayResultListener {
@@ -68,8 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("MainActivity", "onResume, " + temporaryResultString);
         this.isActivityVisible = true;
+        hideProgressDialog();
         if (!this.temporaryResultString.isEmpty()) {
+            Log.d("MainActivity", "onResume, load result from temp string, because activity is currently visible.");
             this.actionResult.setText(temporaryResultString);
             this.temporaryResultString = "";
         }
@@ -78,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause() {
         super.onPause();
+        Log.d("MainActivity", "onPause");
         this.isActivityVisible = false;
     }
 
@@ -247,10 +252,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 + "\nrec_trade_id:" + result.getRecTradeId()
                 + "\nbank_transaction_id:" + result.getBankTransactionId()
                 + "\norder_number:" + result.getOrderNumber();
+        Log.d("MainActivity", "onParseSuccess" + text);
         if (this.isActivityVisible) {
-            this.actionResult.setText(text);
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    actionResult.setText(text);
+                }
+            });
         }
         else {
+            Log.d("MainActivity", "onParseSuccess, save result to temp string, because activity is currently not visible.");
             this.temporaryResultString = text;
         }
 
@@ -259,12 +271,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // TPDAtomePayResultListener
     @Override
     public void onParseFail(int status, String msg) {
+        Log.d("MainActivity", "onParseFail, msg"+ msg);
         hideProgressDialog();
         String text = "Parse atome Pay result failed  status : " + status + " , msg : " + msg;
         if (this.isActivityVisible) {
-            this.actionResult.setText(text);
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    actionResult.setText(text);
+                }
+            });
         }
         else {
+            Log.d("MainActivity", "onParseFail, save result to temp string, because activity is currently not visible.");
             this.temporaryResultString = text;
         }
     }
