@@ -24,6 +24,7 @@ import tech.cherri.tpdirect.callback.TPDAtomePayGetPrimeSuccessCallback;
 import tech.cherri.tpdirect.callback.TPDAtomePayResultListener;
 import tech.cherri.tpdirect.callback.TPDGetPrimeFailureCallback;
 import tech.cherri.tpdirect.exception.TPDAtomePayException;
+import tech.cherri.tpdirect.utils.SDKLog;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,
         TPDAtomePayGetPrimeSuccessCallback, TPDGetPrimeFailureCallback, ResultListener, TPDAtomePayResultListener {

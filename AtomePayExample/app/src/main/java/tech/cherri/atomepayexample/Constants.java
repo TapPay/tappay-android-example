@@ -19,8 +19,8 @@ public class Constants {
 
     public static final String MERCHANT_ID = "atome.test";
 
-    public static final String REPLACE_THIS_PAY_BY_PRIME_DOMAIN = "https://tpdirect-demo.tappaysdk.com/create_order_sit";
+    public static final String PAY_BY_PRIME_URL = "https://tpdirect-demo.tappaysdk.com/create_order_sit";
 
 //    public static final String THIS_APP = "atomepayexample://tech.cherri.atomepayexample"; // for intents
-    public static final String RETURN_URL = "https://fb68-211-72-111-160.ngrok.io/test"; // for universal links
+    public static final String RETURN_URL = "https://6971-211-72-111-160.ngrok.io/test"; // for universal links
 }

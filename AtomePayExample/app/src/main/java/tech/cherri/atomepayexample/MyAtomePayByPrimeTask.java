@@ -30,7 +30,7 @@ public class MyAtomePayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
         this.merchantId = merchantId;
         this.secretString = secretStringRequiredByAtomePay;
         this.listener = listener;
-        this.targetUrl = Constants.REPLACE_THIS_PAY_BY_PRIME_DOMAIN;
+        this.targetUrl = Constants.PAY_BY_PRIME_URL;
 
         jsonRequest = new JSONObject();
 
