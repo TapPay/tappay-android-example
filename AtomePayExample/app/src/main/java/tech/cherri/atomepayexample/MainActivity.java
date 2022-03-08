@@ -202,17 +202,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         showProgressDialog();
 
 
-        ApiUtil.callAtomePayByPrimeWithMiddleServer(
+        ApiUtil.callAtomePayByPrime(
                 getApplicationContext(),
                 prime,
-                Constants.MERCHANT_ID,
                 itemId,
                 itemName,
                 itemQuantity,
                 itemPrice,
-                this
-        );
-
+                this);
 
     }
 
