@@ -27,6 +27,7 @@ public class AtomePayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
     private JSONObject shippingAddress;
     private JSONObject billingAddress;
     private JSONObject resultUrl;
+    private JSONObject cardHolder;
     private String targetUrl;
 
     public AtomePayByPrimeTask(Context context, String prime, String details, ResultListener listener) {
@@ -41,6 +42,7 @@ public class AtomePayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
         shippingAddress = new JSONObject();
         billingAddress = new JSONObject();
         resultUrl = new JSONObject();
+        cardHolder = new JSONObject();
 
         try {
             shippingAddress.put("country_code", "TW");
@@ -58,6 +60,10 @@ public class AtomePayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
             resultUrl.put("frontend_redirect_url", Constants.FRONTEND_REDIRECT_URL_EXAMPLE);
             resultUrl.put("backend_notify_url", Constants.BACKEND_NOTIFY_URL_EXAMPLE);
 
+            cardHolder.put("phone_number", "+8860932123456");
+            cardHolder.put("name", "test");
+            cardHolder.put("email", "test@gmail.com");
+
             jsonRequest.put("prime", prime);
             jsonRequest.put("partner_key", Constants.PARTNER_KEY);
             jsonRequest.put("merchant_id", Constants.MERCHANT_ID);
@@ -65,6 +71,7 @@ public class AtomePayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
             jsonRequest.put("details", this.details);
             jsonRequest.put("extra_info", extraInfo);
             jsonRequest.put("result_url", resultUrl);
+            jsonRequest.put("cardholder", cardHolder);
 
         } catch (JSONException e) {
             e.printStackTrace();
