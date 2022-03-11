@@ -54,5 +54,8 @@
             </intent-filter>
         </activity>
     </application>
-
+    <queries>
+        <!-- for atome pay open -->
+        <package android:name="tw.atome.paylater" />
+    </queries>
 </manifest>
