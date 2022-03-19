@@ -27,7 +27,7 @@
 
                 <data
                     android:scheme="https"
-                    android:host="6971-211-72-111-160.ngrok.io"
+                    android:host="example.com"
                     android:pathPrefix="/test" />
 
                 <data
@@ -44,7 +44,7 @@
 
                 <data
                     android:scheme="https"
-                    android:host="6971-211-72-111-160.ngrok.io"
+                    android:host="example.com"
                     android:pathPrefix="/test" />
 
                 <data
