@@ -155,27 +155,36 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
         </intent-filter>
     </activity>
     ```
-4. Check LINE Pay availability.
+4. Add below queries element to manifest for LINE Pay package visibility in Android 11 and later version
+
+```
+   <queries>
+        <!-- for line pay open -->
+        <package android:name="jp.naver.line.android" />
+   </queries>
+```
+
+5. Check LINE Pay availability.
     ```
     boolean isLinePayAvailable =TPDLinePay.isLinePayAvailable(Context context);
     ```
     
-5. Setup TPDLinePay with uri which is formed with host and scheme(both declared in Step3).
+6. Setup TPDLinePay with uri which is formed with host and scheme(both declared in Step3).
  
    For example:
     ```
     TPDLinePay tpdLinePay = new TPDLinePay(Context context, "linepayexample://tech.cherri");
     ```
     
-6. Open corresponding LinePay payment method by paymentUrl obtained from TapPay pay-by-prime API
+7. Open corresponding LinePay payment method by paymentUrl obtained from TapPay pay-by-prime API
     ```
      tpdLinePay.redirectWithUrl(paymentUrl);
     ```
-7. Receive LinePayResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
+8. Receive LinePayResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
     ```
     tpdLinePay.parseToLinePayResult(Context context, intent.getData(), TPDLinePayResultListener listener);
     ```
-8. Obtain TPDLinePayResult in "onParseSuccess"
+9. Obtain TPDLinePayResult in "onParseSuccess"
 TPDLinePayResult has:
     - status (0 = Success , 924 = Canceled by User)
     - recTradeId 
@@ -281,28 +290,176 @@ For example :
     </intent-filter>
 </activity>
 ```
-4. Check JKO Pay availability.
+
+4. Add below queries element to manifest for JKO Pay package visibility in Android 11 and later version
+
+```
+   <queries>
+        <!-- for jko pay open -->
+        <package android:name="com.jkos.app" />
+   </queries>
+```
+
+5. Check JKO Pay availability.
 
 boolean isJkoPayAvailable = TPDJkoPay.isJkoPayAvailable(this.getApplicationContext());
 
-5. Setup TPDJkoPay with universal links (both declared in Step3)
+6. Setup TPDJkoPay with universal links (both declared in Step3)
 For example:
 ``` android
 TPDJkoPay tpdJkoPay = new TPDJkoPay(getApplicationContext(), "your universal links");
 ```
 
-6.  Open corresponding LinePay payment method by paymentUrl obtained from TapPay pay-by-prime API
+7.  Open corresponding JkoPay payment method by paymentUrl obtained from TapPay pay-by-prime API
 ``` android
 tpdJkoPay.redirectWithUrl(paymentUrl);
 ```
 
-7. Receive JkoPayResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
+8. Receive JkoPayResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
 
 ``` android
 tpdJkoPay.parseToJkoPayResult(getApplicationContext(), intent.getData(), TPDJkoPayResultListener listener)
 ```
 
 8. Obtain TPDJkoPayResult in "onParseSuccess" TPDJkoPayResult has:
+``` android
+status
+recTradeId
+bankTransactionId
+orderNumber
+```
+
+## Easy-Wallet
+
+1. Import tpdirect.aar into your project.
+2. Use TPDSetup to initialize the SDK and setup environment.
+``` android
+TPDSetup.initInstance(getApplicationContext(),
+                Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
+```
+3. Add below intent-filter to an Activity for receiving Easy-Wallet Result with App Link in AndroidManifest.xml and set launch mode to "SingleTask"
+
+For example :
+``` xml
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTask">
+
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data
+            android:host="your host"
+            android:pathPattern="/your path"
+            android:scheme="https" />
+
+    </intent-filter>
+</activity>
+```
+
+4. Add below queries element to manifest for easy-wallet package visibility in Android 11 and later version
+
+```
+   <queries>
+        <!-- for easy-wallet open -->
+        <package android:name="com.easycard.wallet" />
+   </queries>
+```
+
+5. Check Easy-Wallet availability.
+
+boolean isEasyWalletAvailable = TPDEasyWallet.isAvailable(this.getApplicationContext());
+
+6. Setup TPDEasyWallet with universal links (both declared in Step3)
+   For example:
+``` android
+TPDEasyWallet tpdEasyWallet = new TPDEasyWallet(getApplicationContext(), "your universal links");
+```
+
+7.  Open corresponding Easy-Wallet payment method by paymentUrl obtained from TapPay pay-by-prime API
+``` android
+tpdEasyWallet.redirectWithUrl(paymentUrl);
+```
+
+8. Receive EasyWalletResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
+
+``` android
+tpdEasyWallet.parseToEasyWalletResult(getApplicationContext(), intent.getData(), TPDEasyWalletResultListener listener)
+```
+
+8. Obtain TPDEasyWalletResult in "onParseSuccess" TPDEasyWalletResult has:
+``` android
+status
+recTradeId
+bankTransactionId
+orderNumber
+```
+
+## Atome
+
+1. Import tpdirect.aar into your project.
+2. Use TPDSetup to initialize the SDK and setup environment.
+``` android
+TPDSetup.initInstance(getApplicationContext(),
+                Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
+```
+3. Add below intent-filter to an Activity for receiving Atome Result with App Link in AndroidManifest.xml and set launch mode to "SingleTask"
+
+For example :
+``` xml
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTask">
+
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data
+            android:host="your host"
+            android:pathPattern="/your path"
+            android:scheme="https" />
+
+    </intent-filter>
+</activity>
+```
+
+4. Add below queries element to manifest for Atome package visibility in Android 11 and later version
+
+```
+   <queries>
+        <!-- for atome pay open -->
+        <package android:name="tw.atome.paylater" />
+   </queries>
+```
+
+5. Check Atome availability.
+
+boolean isAtomePayAvailable = TPDAtomePay.isAtomePayAppAvailable(this.getApplicationContext());
+
+6. Setup TPDAtomePay with universal links (both declared in Step3)
+   For example:
+``` android
+TPDAtomePay tpdAtomePay = new TPDAtomePay(getApplicationContext(), "your universal links");
+```
+
+7.  Open corresponding Easy-Wallet payment method by paymentUrl obtained from TapPay pay-by-prime API
+``` android
+tpdAtomePay.redirectWithUrl(paymentUrl);
+```
+
+8. Receive AtomeResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
+
+``` android
+tpdAtomePay.parseToAtomePayResult(getApplicationContext(), intent.getData(), TPDAtomePayResultListener listener)
+```
+
+8. Obtain TPDAtomePayResult in "onParseSuccess" TPDAtomePayResult has:
 ``` android
 status
 recTradeId
