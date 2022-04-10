@@ -40,10 +40,13 @@
 
                 <data
                     android:scheme="https"
-                    android:host="5a41-211-72-111-160.ngrok.io"
+                    android:host="example.com"
                     android:pathPrefix="/test" />
             </intent-filter>
         </activity>
     </application>
-
+    <queries>
+        <!-- for pi-wallet open -->
+        <package android:name="tw.com.pchome.android.pi" />
+    </queries>
 </manifest>
