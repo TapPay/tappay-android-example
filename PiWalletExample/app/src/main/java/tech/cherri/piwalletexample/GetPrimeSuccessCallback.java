@@ -1,6 +1,5 @@
 package tech.cherri.piwalletexample;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
@@ -24,7 +23,7 @@ public class GetPrimeSuccessCallback implements TPDPiWalletPayGetPrimeSuccessCal
         PayByPrimeResultListener listener = activity.resultCallback;
 
         MyPayByPrimeTaskForPiWallet payByPrimeTask =
-                new MyPayByPrimeTaskForPiWallet(prime, Constants.REPLACE_THIS_MERCHANT_ID, listener);
+                new MyPayByPrimeTaskForPiWallet(prime, listener);
 
         payByPrimeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 

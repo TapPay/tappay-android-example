@@ -23,7 +23,7 @@ public class PiWalletResultCallback implements TPDPiWalletResultListener {
     @Override
     public void onParseFail(int status, String msg) {
         activity.hideProgressDialog();
-        String text = "Parse atome Pay result failed  status : " + status + " , msg : " + msg;
+        String text = "Parse pi-wallet result failed  status : " + status + " , msg : " + msg;
         activity.resultText.setText(text);
     }
 }

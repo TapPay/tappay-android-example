@@ -18,23 +18,38 @@ import java.net.URL;
 public class MyPayByPrimeTaskForPiWallet extends AsyncTask<String, Void, JSONObject> {
 
     private final JSONObject jsonRequest;
-    private String targetUrl = Constants.REPLACE_THIS_PAY_BY_PRIME_DOMAIN;
     private final PayByPrimeResultListener listener;
+    private String targetUrl;
+    private JSONObject resultUrl;
+    private JSONObject cardHolder;
 
-    public MyPayByPrimeTaskForPiWallet(String prime, String merchantId, PayByPrimeResultListener listener) {
+
+    public MyPayByPrimeTaskForPiWallet(String prime, PayByPrimeResultListener listener) {
         jsonRequest = new JSONObject();
         this.listener = listener;
 
+        this.targetUrl = Constants.TAPPAY_DOMAIN + Constants.TAPPAY_PAY_BY_PRIME_URL;
 
-//        String secretString = "[{\"item_id\": \"" + itemId
-//                + "\",\"item_name\": \"" + itemName
-//                + " \",\"item_quantity\":" + itemQuantity
-//                + ",\"item_price\":" + itemPrice + "}]";
+        resultUrl = new JSONObject();
+        cardHolder = new JSONObject();
+
         try {
+
+            resultUrl.put("frontend_redirect_url", Constants.FRONTEND_REDIRECT_URL_EXAMPLE);
+            resultUrl.put("backend_notify_url", Constants.BACKEND_NOTIFY_URL_EXAMPLE);
+
+            cardHolder.put("phone_number", "+8860932123456");
+            cardHolder.put("name", "test");
+            cardHolder.put("email", "test@gmail.com");
+
             jsonRequest.put("prime", prime);
-            jsonRequest.put("merchant_id", merchantId);
+            jsonRequest.put("partner_key", Constants.PARTNER_KEY);
+            jsonRequest.put("merchant_id", Constants.MERCHANT_ID);
             jsonRequest.put("amount", 50);
-//            jsonRequest.put("details", secretString);
+            jsonRequest.put("details", "item details");
+            jsonRequest.put("result_url", resultUrl);
+            jsonRequest.put("cardholder", cardHolder);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
