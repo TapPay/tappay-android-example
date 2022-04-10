@@ -95,19 +95,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void preparePiWallet() {
         context = this.getApplicationContext();
-        boolean isPiWalletInstalled = TPDPiWallet.isPiWalletInstalled(context);
+        boolean isPiWalletInstalled = TPDPiWallet.isPiWalletAvailable(context);
         if (!isPiWalletInstalled) {
-            resultText.setText("Pi Wallet is not installed.");
+            resultText.setText("Pi-Wallet is not installed.");
             piWalletButton.setVisibility(View.INVISIBLE);
             return;
         }
 
         try {
-            tpdPiWalletPay = new TPDPiWallet(context, Constants.THIS_APP);
-            resultText.setText("Pi Wallet is available.");
+            tpdPiWalletPay = new TPDPiWallet(context, Constants.RETURN_URL);
+            resultText.setText("Pi-Wallet is available.");
         } catch (TPDPiWalletException e) {
             e.printStackTrace();
-            resultText.setText("Pi Wallet is not available.");
+            resultText.setText("Pi-Wallet is not available.");
         }
     }
 

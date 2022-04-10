@@ -1,6 +1,6 @@
 package tech.cherri.piwalletexample;
 
-import tech.cherri.tpdirect.api.TPDPiWalletPayResult;
+import tech.cherri.tpdirect.api.TPDPiWalletResult;
 import tech.cherri.tpdirect.callback.TPDPiWalletResultListener;
 
 public class PiWalletResultCallback implements TPDPiWalletResultListener {
@@ -11,7 +11,7 @@ public class PiWalletResultCallback implements TPDPiWalletResultListener {
     }
 
     @Override
-    public void onParseSuccess(TPDPiWalletPayResult tpdPiWalletPayResult) {
+    public void onParseSuccess(TPDPiWalletResult tpdPiWalletPayResult) {
         activity.hideProgressDialog();
         String text = "status:" + tpdPiWalletPayResult.getStatus()
                 + "\nrec_trade_id:" + tpdPiWalletPayResult.getRecTradeId()

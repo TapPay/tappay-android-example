@@ -19,5 +19,5 @@ public class Constants {
 
     public static final String MERCHANT_ID = "your merchant id";
 
-    public static final String THIS_APP = "UNIVERSAL LINK"; // for universal links
+    public static final String RETURN_URL = "UNIVERSAL LINK"; // for universal links
 }

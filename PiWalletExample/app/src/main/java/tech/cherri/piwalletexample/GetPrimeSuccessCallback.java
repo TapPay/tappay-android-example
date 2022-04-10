@@ -3,9 +3,9 @@ package tech.cherri.piwalletexample;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
-import tech.cherri.tpdirect.callback.TPDPiWalletPayGetPrimeSuccessCallback;
+import tech.cherri.tpdirect.callback.TPDPiWalletGetPrimeSuccessCallback;
 
-public class GetPrimeSuccessCallback implements TPDPiWalletPayGetPrimeSuccessCallback {
+public class GetPrimeSuccessCallback implements TPDPiWalletGetPrimeSuccessCallback {
     private final TextView resultText;
     private final MainActivity activity;
 
