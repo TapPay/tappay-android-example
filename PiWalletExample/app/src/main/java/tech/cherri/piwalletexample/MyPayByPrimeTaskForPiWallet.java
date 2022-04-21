@@ -20,13 +20,15 @@ public class MyPayByPrimeTaskForPiWallet extends AsyncTask<String, Void, JSONObj
     private final JSONObject jsonRequest;
     private final PayByPrimeResultListener listener;
     private String targetUrl;
+    private String details;
     private JSONObject resultUrl;
     private JSONObject cardHolder;
 
 
-    public MyPayByPrimeTaskForPiWallet(String prime, PayByPrimeResultListener listener) {
+    public MyPayByPrimeTaskForPiWallet(String prime, PayByPrimeResultListener listener, String details) {
         jsonRequest = new JSONObject();
         this.listener = listener;
+        this.details = details;
 
         this.targetUrl = Constants.TAPPAY_DOMAIN + Constants.TAPPAY_PAY_BY_PRIME_URL;
 
@@ -45,8 +47,8 @@ public class MyPayByPrimeTaskForPiWallet extends AsyncTask<String, Void, JSONObj
             jsonRequest.put("prime", prime);
             jsonRequest.put("partner_key", Constants.PARTNER_KEY);
             jsonRequest.put("merchant_id", Constants.MERCHANT_ID);
-            jsonRequest.put("amount", 50);
-            jsonRequest.put("details", "item details");
+            jsonRequest.put("amount", 1);
+            jsonRequest.put("details", details);
             jsonRequest.put("result_url", resultUrl);
             jsonRequest.put("cardholder", cardHolder);
 

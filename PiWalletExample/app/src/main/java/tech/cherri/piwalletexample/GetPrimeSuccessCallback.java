@@ -20,10 +20,15 @@ public class GetPrimeSuccessCallback implements TPDPiWalletGetPrimeSuccessCallba
         this.resultText.setText(text);
         activity.showProgressDialog();
 
+        String details = "[{\"item_id\": \"" + "item_1"
+                + "\",\"item_name\": \"" + "item_No_1"
+                + " \",\"item_quantity\":" + "1"
+                + ",\"item_price\":" + "100" + "}]";
+
         PayByPrimeResultListener listener = activity.resultCallback;
 
         MyPayByPrimeTaskForPiWallet payByPrimeTask =
-                new MyPayByPrimeTaskForPiWallet(prime, listener);
+                new MyPayByPrimeTaskForPiWallet(prime, listener, details);
 
         payByPrimeTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
