@@ -475,7 +475,7 @@ orderNumber
 TPDSetup.initInstance(getApplicationContext(),
                 Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
 ```
-3. Add below intent-filter to an Activity for receiving Atome Result with App Link in AndroidManifest.xml and set launch mode to "SingleTask"
+3. Add below intent-filter to an Activity for receiving Pi-Wallet Result with App Link in AndroidManifest.xml and set launch mode to "SingleTask"
 
 For example :
 ``` xml
@@ -498,12 +498,14 @@ For example :
 </activity>
 ```
 
-4. Add below queries element to manifest for Atome package visibility in Android 11 and later version
+4. Add below queries element to manifest for Pi-Wallet package visibility in Android 11 and later version
 
 ```
    <queries>
-        <!-- for Pi-Wallet open -->
+        <!-- for pi-wallet production app open  -->
         <package android:name="tw.com.pchome.android.pi" />
+        <!-- for pi-wallet test app open -->
+        <!--    <package android:name="tw.com.pchome.android.pi.partner" />-->
    </queries>
 ```
 

@@ -46,7 +46,9 @@
         </activity>
     </application>
     <queries>
-        <!-- for pi-wallet open -->
+        <!-- for pi-wallet production app open -->
         <package android:name="tw.com.pchome.android.pi" />
+        <!-- for pi-wallet test app open -->
+<!--        <package android:name="tw.com.pchome.android.pi.partner" />-->
     </queries>
 </manifest>
