@@ -448,7 +448,7 @@ boolean isAtomePayAvailable = TPDAtomePay.isAtomePayAppAvailable(this.getApplica
 TPDAtomePay tpdAtomePay = new TPDAtomePay(getApplicationContext(), "your universal links");
 ```
 
-7.  Open corresponding Easy-Wallet payment method by paymentUrl obtained from TapPay pay-by-prime API
+7.  Open corresponding Atome payment method by paymentUrl obtained from TapPay pay-by-prime API
 ``` android
 tpdAtomePay.redirectWithUrl(paymentUrl);
 ```
@@ -460,6 +460,77 @@ tpdAtomePay.parseToAtomePayResult(getApplicationContext(), intent.getData(), TPD
 ```
 
 8. Obtain TPDAtomePayResult in "onParseSuccess" TPDAtomePayResult has:
+``` android
+status
+recTradeId
+bankTransactionId
+orderNumber
+```
+
+## Pi-Wallet
+
+1. Import tpdirect.aar into your project.
+2. Use TPDSetup to initialize the SDK and setup environment.
+``` android
+TPDSetup.initInstance(getApplicationContext(),
+                Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
+```
+3. Add below intent-filter to an Activity for receiving Pi-Wallet Result with App Link in AndroidManifest.xml and set launch mode to "SingleTask"
+
+For example :
+``` xml
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTask">
+
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data
+            android:host="your host"
+            android:pathPattern="/your path"
+            android:scheme="https" />
+
+    </intent-filter>
+</activity>
+```
+
+4. Add below queries element to manifest for Pi-Wallet package visibility in Android 11 and later version
+
+```
+   <queries>
+        <!-- for pi-wallet production app open  -->
+        <package android:name="tw.com.pchome.android.pi" />
+        <!-- for pi-wallet test app open -->
+        <!--    <package android:name="tw.com.pchome.android.pi.partner" />-->
+   </queries>
+```
+
+5. Check Pi-Wallet availability.
+
+boolean isPiWalletAvailable = TPDPiWallet.isPiWalletAvailable(this.getApplicationContext());
+
+6. Setup TPDPiWallet with universal links (both declared in Step3)
+   For example:
+``` android
+TPDPiWallet tpdPiWallet = new TPDPiWallet(getApplicationContext(), "your universal links");
+```
+
+7.  Open corresponding Pi-Wallet payment method by paymentUrl obtained from TapPay pay-by-prime API
+``` android
+tpdPiWallet.redirectWithUrl(paymentUrl);
+```
+
+8. Receive PiWalletResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
+
+``` android
+tpdPiWallet.parseToPiWalletResult(getApplicationContext(), intent.getData(), TPDPiWalletResultListener listener)
+```
+
+8. Obtain TPDPiWalletResult in "onParseSuccess" TPDPiWalletResult has:
 ``` android
 status
 recTradeId
