@@ -117,6 +117,7 @@ public class MyPayByPrimeTaskForPiWallet extends AsyncTask<String, Void, JSONObj
         connection.setConnectTimeout(40000);
         connection.setReadTimeout(30000);
         connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("x-api-key", Constants.PARTNER_KEY);
         connection.setRequestMethod("POST");
         return connection;
     }
