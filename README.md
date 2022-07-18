@@ -8,27 +8,50 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
 >Obtain your app id and keys here.
      https://www.tappaysdk.com/en
 
-## 如需使用 RBA 相關功能
-請將 /DirectPayExample/app/libs/android-A1.0.0.aar 此檔案與 tpdirect.aar 一同放置於 lib 中
 
-# Demo
+#
+
+## Usage of each pay
+  - [Direct Pay](#direct-pay)
+  - [Google Pay](#google-pay)
+  - [LINE Pay](#line-pay)
+  - [Samsung Pay](#samsung-pay)
+  - [JKOPAY](#jkopay)
+  - [Easy-Wallet](#easy-wallet)
+  - [Atome](#atome)
+  - [Pi-Wallet](#pi-wallet)
+  - [Plus Pay](#plus-pay)
+
+# 
+## Setup Android App link in Android Studio
+
+
+1. Setup a config need to use an API return JSON string, API path https://"your host"/"your path" 
+JSON string For example:
+```
+[{
+  "relation": ["delegate_permission/common.get_login_creds"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "your package name",
+    "sha256_cert_fingerprints":
+    ["your sha256_cert_fingerprints"]
+  }
+}]
+```
+
+2. Android studio will generate  "assetlinks.json" for you, and you need to save above file to : 
+   https://"your host"/.well-known/assetlinks.json
+
+
+![](Pic/app-links-1.png)
+![](Pic/app-links-2.png)
+
+#
+
 ## Direct Pay
 ![direct pay demo](https://media.giphy.com/media/xUOxf4aa0035sXkfeg/giphy.gif)
 
-
-## Google Pay
-![google pay demo](Gif/google_pay_demo.gif)
-
-## LINE Pay
-![line pay demo](Gif/line_pay_demo.gif)
-
-## Samsung Pay
-![samsung pay demo](Gif/samsung_pay_demo.gif)
-
-
-# Usage
-
-## Direct Pay
 1. Import tpdirect.aar into your project.
 2. Use TPDSetup to initialize the SDK and setup environment.
     ```Java
@@ -63,8 +86,14 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     ```Java
     card.getPrime();
     ```
-    
+
+## 如需使用 RBA 相關功能
+請將 /DirectPayExample/app/libs/android-A1.0.0.aar 此檔案與 tpdirect.aar 一同放置於 lib 中
+
+#
+
 ## Google Pay
+![google pay demo](Gif/google_pay_demo.gif)
 
 1. Import tpdirect.aar into your project.
 2. Add dependencies into your app's **build.gradle**
@@ -129,6 +158,7 @@ TapPay Android SDK is used to get token(i.e. prime) on Android platform for char
     
     
 ## LINE Pay
+![line pay demo](Gif/line_pay_demo.gif)
 
 1. Import tpdirect.aar into your project.
 2. Use TPDSetup to initialize the SDK and setup environment.
@@ -193,6 +223,7 @@ TPDLinePayResult has:
 
 
 ## Samsung Pay
+![samsung pay demo](Gif/samsung_pay_demo.gif)
 
 1. Import tpdirect.aar and samsungpay-1.x.jar into your project.
 
@@ -500,7 +531,7 @@ For example :
 
 4. Add below queries element to manifest for Pi-Wallet package visibility in Android 11 and later version
 
-```
+``` xml
    <queries>
         <!-- for pi-wallet production app open  -->
         <package android:name="tw.com.pchome.android.pi" />
@@ -513,10 +544,10 @@ For example :
 
 boolean isPiWalletAvailable = TPDPiWallet.isPiWalletAvailable(this.getApplicationContext());
 
-6. Setup TPDPiWallet with universal links (both declared in Step3)
+6. Setup TPDPiWallet with [Android app links](#setup-android-app-link-in-android-studio)
    For example:
 ``` android
-TPDPiWallet tpdPiWallet = new TPDPiWallet(getApplicationContext(), "your universal links");
+TPDPiWallet tpdPiWallet = new TPDPiWallet(getApplicationContext(), "your android app links");
 ```
 
 7.  Open corresponding Pi-Wallet payment method by paymentUrl obtained from TapPay pay-by-prime API
@@ -538,24 +569,79 @@ bankTransactionId
 orderNumber
 ```
 
-## Setup App Link
 
-1. Setup a config need to use an API return JSON string, API path https://"your host"/"your path"  (both declared in Step3)
-JSON string For example:
+#
+
+## Plus Pay
+
+1. Import tpdirect.aar into your project.
+2. Use TPDSetup to initialize the SDK and setup environment.
+``` android
+TPDSetup.initInstance(getApplicationContext(),
+                Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
 ```
-[{
-  "relation": ["delegate_permission/common.get_login_creds"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "your package name",
-    "sha256_cert_fingerprints":
-    ["your sha256_cert_fingerprints"]
-  }
-}]
+3. Specify intent-filter to an Activity for receiving Plus Pay Result with [Android app links](#setup-android-app-link-in-android-studio) (highly recommand) in AndroidManifest.xml and set launch mode to "SingleTask"
+
+ex:
+``` xml
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTask">
+
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data
+            android:host="your host"
+            android:pathPattern="/your path"
+            android:scheme="https" />
+
+    </intent-filter>
+</activity>
 ```
 
-2. How to get JSON string?
+4. Add below queries element to manifest for Plus Pay package visibility in Android 11 and later version
 
+``` xml
+    <queries>
+        <!-- for plus pay production app -->
+        <package android:name="grasea.familife" />
+        <!-- for plus pay sandbox app -->
+<!--        <package android:name="tw.com.pluspay.vendor.uat" />-->
+    </queries>
+```
 
-![](Pic/app-links-1.png)
-![](Pic/app-links-2.png)
+5. Check Plus Pay availability.
+
+``` Java
+boolean isPlusPayAvailable = TPDPlusPay.isPlusPayAvailable(this.getApplicationContext());
+```
+
+6. Setup TPDPlusPay with [Android app links](#setup-android-app-link-in-android-studio)
+   ex:
+``` Java
+TPDPlusPay tpdPlusPay = new TPDPlusPay(getApplicationContext(), "your android app links");
+``` 
+
+7.  Open corresponding Plus Pay payment method by paymentUrl obtained from TapPay pay-by-prime API
+``` Java
+tpdPlusPay.redirectWithUrl(paymentUrl);
+```
+
+8. Receive Plus Pay Result in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
+
+``` Java
+tpdPlusPay.parseToPlusPayResult(getApplicationContext(), data, TPDPlusPayResultListener listener);
+```
+
+9.  callback from TPDPlusPayResultListener.onParseSuceess will return following attribute if you need to show in your UI
+    
+``` 
+status
+rec_trade_id
+bank_transaction_id
+order_number
+```
