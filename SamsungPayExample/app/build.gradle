@@ -25,8 +25,7 @@ android {
 }
 
 dependencies {
-    implementation(name: 'tpdirect', ext: 'aar')
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
