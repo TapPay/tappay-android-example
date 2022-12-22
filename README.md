@@ -88,7 +88,7 @@ JSON string For example:
     ```
 
 ## 如需使用 RBA 相關功能
-請將 /DirectPayExample/app/libs/cdmerchantrba-1.0.2.aar 此檔案與 tpdirect.aar 一同放置於 lib 中
+請將 /DirectPayExample/app/libs/android-A1.0.0.aar 此檔案與 tpdirect.aar 一同放置於 lib 中
 
 #
 
