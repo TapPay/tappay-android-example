@@ -114,9 +114,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         TPDSetup.initInstance(getApplicationContext(),
                 Constants.APP_ID, Constants.APP_KEY, Constants.SERVER_TYPE);
 
-//        TPDSetup.initInstanceWithRba(getApplicationContext(),
-//                Constants.APP_ID, Constants.APP_KEY, Constants.RBA_APP_ID, Constants.RBA_APP_KEY, Constants.SERVER_TYPE);
-
         //2.Setup input form
         tpdForm = (TPDForm) findViewById(R.id.tpdCardInputForm);
         tpdForm.setTextErrorColor(Color.RED);

@@ -14,8 +14,8 @@ public class Constants {
 
     public static final String TAPPAY_LINEPAY_RESULT_CALLBACK_URI = "linepayexample://tech.cherri";
 
-    public static final String PARTNER_KEY = "partner_6ID1DoDlaPrfHw6HBZsULfTYtDmWs0q0ZZGKMBpp4YICWBxgK97eK3RM"; //your partner key
-    public static final String APP_KEY = "app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC"; //your app key
-    public static final Integer APP_ID = 11334; //your app id
-    public static final String MERCHANT_ID = "LINE,TEST"; //your merchant id
+    public static final String PARTNER_KEY = "your partner key"; //your partner key
+    public static final String APP_KEY = "your app key"; //your app key
+    public static final Integer APP_ID = 0; //your app id
+    public static final String MERCHANT_ID = "your merchant id"; //your merchant id
 }

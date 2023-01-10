@@ -14,7 +14,4 @@ public class Constants {
     public static final Integer APP_ID = 0;
     public static final String MERCHANT_ID = "your merchant id";
 
-    public static final String RBA_APP_ID = "your rba app id";
-    public static final String RBA_APP_KEY = "your rba app key";
-
 }
