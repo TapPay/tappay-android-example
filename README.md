@@ -88,7 +88,8 @@ JSON string For example:
     ```
 
 ## 如需使用 RBA 相關功能
-請將 /DirectPayExample/app/libs/android-A1.0.0.aar 此檔案與 tpdirect.aar 一同放置於 lib 中
+- 若你是使用3.9.0 版本,直接使用tpdirect.aar 即可
+- 若您是使用3.9.0 之前版本,請將 /DirectPayExample/app/libs/android-A1.0.0.aar 此檔案與 tpdirect.aar 一同放置於 lib 中
 
 #
 
