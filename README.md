@@ -50,7 +50,7 @@ JSON string For example:
 #
 
 ## Direct Pay
-![direct pay demo](https://media.giphy.com/media/xUOxf4aa0035sXkfeg/giphy.gif)
+![direct pay demo](Gif/direct_pay_demo.gif)
 
 1. Import tpdirect.aar into your project.
 2. Use TPDSetup to initialize the SDK and setup environment.
