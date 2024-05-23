@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId 'tech.cherri.linepayexample'
-        minSdkVersion 18
+        minSdkVersion 19
         targetSdkVersion 31
         versionCode 15
         versionName "2.3.1"

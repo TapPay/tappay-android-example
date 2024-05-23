@@ -100,7 +100,7 @@ JSON string For example:
 2. Add dependencies into your app's **build.gradle**
     ```
     compile 'com.android.support:appcompat-v7:24.1.1'
-    compile 'com.google.android.gms:play-services-wallet:16.0.0'
+    implementation 'com.google.android.gms:play-services-wallet:19.3.0'
     ```
 3. Add below metadata in AndroidManifest.xml
     ```xml

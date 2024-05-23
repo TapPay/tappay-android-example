@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId 'tech.cherri.payment.google'
-        minSdkVersion 18
+        minSdkVersion 19
         targetSdkVersion 31
         versionCode 15
         versionName "2.3.1"
@@ -37,5 +37,5 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation 'androidx.appcompat:appcompat:1.0.0'
-    implementation 'com.google.android.gms:play-services-wallet:16.0.0'
+    implementation 'com.google.android.gms:play-services-wallet:19.3.0'
 }
