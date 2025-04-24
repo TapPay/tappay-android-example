@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tvMerchantId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="Merchant ID" />
+
+        <EditText
+            android:id="@+id/etMerchantId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:text="px.pay.plus.test" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_marginTop="10dp">
+
+<!--        <EditText-->
+<!--            android:id="@+id/inputUrl"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="example://pxpayplus.app/test" />-->
+        <EditText
+            android:id="@+id/inputUrl"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="https://tpdirect-demo.tappaysdk.com/pxpayplusdemo" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnGetPrime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="get prime" />
+
+        <Button
+            android:id="@+id/btnPayByPrime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="pay by prime" />
+
+        <Button
+            android:id="@+id/btnRedirectUrl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="redirect url" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/btnRefresh"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Refresh" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/tvGetPrimeResultState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="get prime result:" />
+
+        <TextView
+            android:id="@+id/tvPayByPrimeResultState"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="pay by prime result:" />
+
+        <TextView
+            android:id="@+id/tvPXPayPlusResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="px pay plus result:" />
+    </LinearLayout>
+</LinearLayout>
