@@ -211,7 +211,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (v.getId() == R.id.btnRedirectUrl) {
-            tpdPXPayPlus.redirectWithUrl(paymentUrl);
+            if (null != paymentUrl) {
+                tpdPXPayPlus.redirectWithUrl(paymentUrl);
+            }
         }
     }
 
