@@ -16,9 +16,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import tech.cherri.tpdirect.api.TPDServerType;
-import tech.cherri.tpdirect.api.TPDSetup;
-import tech.cherri.tpdirect.api.TPDUrls;
 import tech.cherri.tpdirect.utils.SDKLog;
 
 public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
@@ -51,17 +48,17 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
         cardHolder = new JSONObject();
 
         try {
-            shippingAddress.put("country_code", "TW");
-            shippingAddress.put("lines", "台北市中正區羅斯福路100號六樓");
-            shippingAddress.put("postcode", "100");
+//            shippingAddress.put("country_code", "TW");
+//            shippingAddress.put("lines", "台北市中正區羅斯福路100號六樓");
+//            shippingAddress.put("postcode", "100");
+//
+//            billingAddress.put("country_code", "TW");
+//            billingAddress.put("lines", "台北市中正區羅斯福路100號六樓");
+//            billingAddress.put("postcode", "100");
 
-            billingAddress.put("country_code", "TW");
-            billingAddress.put("lines", "台北市中正區羅斯福路100號六樓");
-            billingAddress.put("postcode", "100");
-
-            shopperInfo.put("shipping_address", shippingAddress);
-            shopperInfo.put("billing_address", billingAddress);
-            extraInfo.put("shopper_info", shopperInfo);
+//            shopperInfo.put("shipping_address", shippingAddress);
+//            shopperInfo.put("billing_address", billingAddress);
+//            extraInfo.put("shopper_info", shopperInfo);
 
             resultUrl.put("frontend_redirect_url", "https://www.google.com.tw");
             resultUrl.put("backend_notify_url", "https://www.google.com.tw");
@@ -75,8 +72,9 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
             jsonRequest.put("partner_key", Constants.PARTNER_KEY);
             jsonRequest.put("merchant_id", Constants.MERCHANT_ID);
             jsonRequest.put("amount", 8);
+            jsonRequest.put("currency", "TWD");
             jsonRequest.put("details", this.details);
-            jsonRequest.put("extra_info", extraInfo);
+//            jsonRequest.put("extra_info", extraInfo);
             jsonRequest.put("result_url", resultUrl);
             jsonRequest.put("cardholder", cardHolder);
 

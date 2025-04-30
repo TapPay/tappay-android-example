@@ -55,11 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (TPDCustomException e) {
             Log.e(TAG, Log.getStackTraceString(e));
         }
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+        handleIncomingIntent(getIntent());
     }
 
     @Override
@@ -194,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String itemId = "AndroidItemId";
             String itemName = "AndroidPhone";
             int itemQuantity = 1;
-            int itemPrice = 50;
+            int itemPrice = 8;
             String details = "[{\"item_id\": \"" + itemId
                     + "\",\"item_name\": \"" + itemName
                     + " \",\"item_quantity\":" + itemQuantity

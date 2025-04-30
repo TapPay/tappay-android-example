@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.7"
-            android:text="px.pay.plus.test" />
+            android:text="PX.PAY.PLUS.TEST.EC.NEW" />
 
 
     </LinearLayout>
@@ -34,18 +34,18 @@
         android:weightSum="1"
         android:layout_marginTop="10dp">
 
-<!--        <EditText-->
-<!--            android:id="@+id/inputUrl"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_weight="1"-->
-<!--            android:text="example://pxpayplus.app/test" />-->
         <EditText
             android:id="@+id/inputUrl"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="https://tpdirect-demo.tappaysdk.com/pxpayplusdemo" />
+            android:text="pxpayplusexample://pxpayplus.uri:8888/test" />
+<!--        <EditText-->
+<!--            android:id="@+id/inputUrl"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_weight="1"-->
+<!--            android:text="https://pxpayplus.universal-links.com/test" />-->
 
     </LinearLayout>
 
@@ -99,18 +99,21 @@
             android:id="@+id/tvGetPrimeResultState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="get prime result:" />
 
         <TextView
             android:id="@+id/tvPayByPrimeResultState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="pay by prime result:" />
 
         <TextView
             android:id="@+id/tvPXPayPlusResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="px pay plus result:" />
     </LinearLayout>
 </LinearLayout>
