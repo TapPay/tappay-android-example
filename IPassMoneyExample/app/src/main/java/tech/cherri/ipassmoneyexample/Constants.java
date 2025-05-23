@@ -5,7 +5,7 @@ import tech.cherri.tpdirect.api.TPDServerType;
 
 public class Constants {
 
-    public static final TPDServerType SERVER_TYPE = TPDServerType.Sandbox;;
+    public static final TPDServerType SERVER_TYPE = TPDServerType.Sandbox;
     public static final String TAPPAY_DOMAIN = "https://sandbox.tappaysdk.com/tpc";
     public static final String TAPPAY_PAY_BY_PRIME_URL = "/payment/pay-by-prime";
     public static final String FRONTEND_REDIRECT_URL_EXAMPLE = "https://example.com/front-end-redirect";
