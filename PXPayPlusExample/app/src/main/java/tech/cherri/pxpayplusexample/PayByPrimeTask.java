@@ -66,7 +66,7 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
             cardHolder.put("phone_number", "+8860924951774");
             cardHolder.put("name", "test");
             cardHolder.put("email", "test@gmail.com");
-            cardHolder.put("member_id", "test24951774");
+            cardHolder.put("bank_member_id", "test24951774");
 
             jsonRequest.put("prime", prime);
             jsonRequest.put("partner_key", Constants.PARTNER_KEY);

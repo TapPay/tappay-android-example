@@ -430,75 +430,6 @@ bankTransactionId
 orderNumber
 ```
 
-## Atome
-
-1. Import tpdirect.aar into your project.
-2. Use TPDSetup to initialize the SDK and setup environment.
-``` android
-TPDSetup.initInstance(getApplicationContext(),
-                Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
-```
-3. Add below intent-filter to an Activity for receiving Atome Result with App Link in AndroidManifest.xml and set launch mode to "SingleTask"
-
-For example :
-``` xml
-<activity
-    android:name=".MainActivity"
-    android:launchMode="singleTask">
-
-    <intent-filter android:autoVerify="true">
-        <action android:name="android.intent.action.VIEW" />
-
-        <category android:name="android.intent.category.DEFAULT" />
-        <category android:name="android.intent.category.BROWSABLE" />
-
-        <data
-            android:host="your host"
-            android:pathPattern="/your path"
-            android:scheme="https" />
-
-    </intent-filter>
-</activity>
-```
-
-4. Add below queries element to manifest for Atome package visibility in Android 11 and later version
-
-```
-   <queries>
-        <!-- for atome pay open -->
-        <package android:name="tw.atome.paylater" />
-   </queries>
-```
-
-5. Check Atome availability.
-
-boolean isAtomePayAvailable = TPDAtomePay.isAtomePayAppAvailable(this.getApplicationContext());
-
-6. Setup TPDAtomePay with universal links (both declared in Step3)
-   For example:
-``` android
-TPDAtomePay tpdAtomePay = new TPDAtomePay(getApplicationContext(), "your universal links");
-```
-
-7.  Open corresponding Atome payment method by paymentUrl obtained from TapPay pay-by-prime API
-``` android
-tpdAtomePay.redirectWithUrl(paymentUrl);
-```
-
-8. Receive AtomeResult in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
-
-``` android
-tpdAtomePay.parseToAtomePayResult(getApplicationContext(), intent.getData(), TPDAtomePayResultListener listener)
-```
-
-8. Obtain TPDAtomePayResult in "onParseSuccess" TPDAtomePayResult has:
-``` android
-status
-recTradeId
-bankTransactionId
-orderNumber
-```
-
 ## Pi-Wallet
 
 1. Import tpdirect.aar into your project.
@@ -720,3 +651,77 @@ rec_trade_id
 bank_transaction_id
 order_number
 ```
+
+#
+
+## iPass Money
+
+1. Import tpdirect.aar into your project.
+2. Use TPDSetup to initialize the SDK and setup environment.
+``` android
+TPDSetup.initInstance(getApplicationContext(),
+                Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
+```
+3. Specify intent-filter to an Activity for receiving iPass Money Result with [Android app links](#setup-android-app-link-in-android-studio) (highly recommand) in AndroidManifest.xml and set launch mode to "SingleTask"
+
+ex:
+``` xml
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTask">
+
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data
+            android:host="your host"
+            android:pathPattern="/your path"
+            android:scheme="https" />
+
+    </intent-filter>
+</activity>
+```
+
+4. Add below queries element to manifest for iPass Money package visibility in Android 7 and later version
+
+``` xml
+    <queries>
+        <package android:name="com.ipass.ipassmoney" />
+    </queries>
+```
+
+5. Setup TPDIpassMoney with [Android app links](#setup-android-app-link-in-android-studio)
+   ex:
+``` Java
+TPDIpassMoney tpdIpassMoney = new TPDIpassMoney(getApplicationContext(), "your android app links");
+``` 
+
+6.  Open corresponding iPass Money payment method by paymentUrl obtained from TapPay pay-by-prime API
+``` Java
+tpdIpassMoney.redirectWithUrl(paymentUrl);
+```
+
+7. Receive iPass Money Result in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
+
+``` Java
+tpdIpassMoney.parseToIpassMoneyResult(getApplicationContext(), data, TPDIpassMoneyResultListener listener);
+```
+
+8.  callback from TPDIpassMoneyResultListener.onParseSuceess will return following attribute if you need to show in your UI
+    
+``` 
+status
+rec_trade_id
+bank_transaction_id
+order_number
+```
+

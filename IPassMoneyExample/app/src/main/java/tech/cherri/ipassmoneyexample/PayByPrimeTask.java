@@ -1,6 +1,5 @@
 package tech.cherri.ipassmoneyexample;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -65,7 +64,7 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
             cardHolder.put("phone_number", "+8860924951774");
             cardHolder.put("name", "test");
             cardHolder.put("email", "test@gmail.com");
-            cardHolder.put("member_id", "test" + System.currentTimeMillis());
+            cardHolder.put("bank_member_id", "test" + System.currentTimeMillis());
 
             jsonRequest.put("prime", prime);
             jsonRequest.put("partner_key", Constants.PARTNER_KEY);
@@ -134,7 +133,6 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
                     this.ipassMoneyFragment.showMessage(jsonObject.toString(), false, "");
             }
         } catch (Exception e) {
-            //listener.onTaskFailed(e.toString());
             e.printStackTrace();
         }
 

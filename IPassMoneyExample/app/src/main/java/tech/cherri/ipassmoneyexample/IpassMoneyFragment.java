@@ -50,7 +50,7 @@ public class IpassMoneyFragment extends Fragment implements View.OnClickListener
         setupView(view);
 
         try {
-            tpdIpassMoney = new TPDIpassMoney(requireActivity().getApplicationContext(), inputUrl.getText().toString());
+            tpdIpassMoney = new TPDIpassMoney(requireContext(), inputUrl.getText().toString());
         } catch (TPDCustomException e) {
             Log.e(TAG, Log.getStackTraceString(e));
         }
@@ -62,10 +62,10 @@ public class IpassMoneyFragment extends Fragment implements View.OnClickListener
         super.onResume();
         if (remember) {
             etMerchantId.setText("IPASS.MONEY.ONLINE.BINDING.TEST");
-            Toast.makeText(requireActivity().getApplicationContext(), "Binding", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Binding", Toast.LENGTH_SHORT).show();
         } else {
             etMerchantId.setText("IPASS.MONEY.ONLINE.EC.TEST");
-            Toast.makeText(requireActivity().getApplicationContext(), "EC", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "EC", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -76,10 +76,10 @@ public class IpassMoneyFragment extends Fragment implements View.OnClickListener
         }
         Log.d(TAG, "handleIncomingIntent, data: " + intent.getData());
         if (intent.getData().toString().startsWith("http")) {
-            Toast.makeText(requireActivity().getApplicationContext(), "Universal Link", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Universal Link", Toast.LENGTH_SHORT).show();
             androidAppLink(intent.getData());
         } else {
-            Toast.makeText(requireActivity().getApplicationContext(), "Deep Link", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), "Deep Link", Toast.LENGTH_SHORT).show();
             androidDeepLink(intent.getData());
         }
     }
@@ -91,7 +91,7 @@ public class IpassMoneyFragment extends Fragment implements View.OnClickListener
 
         this.showLoadingProgressbar();
 
-        tpdIpassMoney.parseToIpassMoneyResult(requireActivity().getApplicationContext(), data, new TPDIpassMoneyResultListener() {
+        tpdIpassMoney.parseToIpassMoneyResult(requireContext(), data, new TPDIpassMoneyResultListener() {
             @Override
             public void onParseSuccess(TPDIpassMoneyResult result) {
                 dismissLoadingProgressbar();
@@ -127,8 +127,8 @@ public class IpassMoneyFragment extends Fragment implements View.OnClickListener
     private void prepareIpassMoney() {
         String payName = "IpassMoney";
         try {
-            Toast.makeText(requireActivity().getApplicationContext(), "prepareIpassMoney > " + inputUrl.getText().toString(), Toast.LENGTH_SHORT).show();
-            tpdIpassMoney = new TPDIpassMoney(requireActivity().getApplicationContext(), inputUrl.getText().toString());
+            Toast.makeText(requireContext(), "prepareIpassMoney > " + inputUrl.getText().toString(), Toast.LENGTH_SHORT).show();
+            tpdIpassMoney = new TPDIpassMoney(requireContext(), inputUrl.getText().toString());
             tvIpassMoneyResult.setText(payName + " is Available.");
         } catch (TPDCustomException e) {
             Log.e(TAG, "prepareIpassMoney exception: " + Log.getStackTraceString(e));

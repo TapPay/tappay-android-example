@@ -67,6 +67,12 @@
             android:layout_height="wrap_content"
             android:text="pay by prime" />
 
+        <CheckBox
+            android:id="@+id/cbRemember"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Remember = false" />
+
         <Button
             android:id="@+id/btnRedirectUrl"
             android:layout_width="match_parent"
