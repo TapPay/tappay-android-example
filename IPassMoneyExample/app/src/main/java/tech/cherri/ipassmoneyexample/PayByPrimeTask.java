@@ -1,6 +1,5 @@
-package tech.cherri.pxpayplusexample;
+package tech.cherri.ipassmoneyexample;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -29,14 +28,13 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
     private JSONObject resultUrl;
     private JSONObject cardHolder;
     private String targetUrl;
-    private MainActivity mainActivity;
+    private IpassMoneyFragment ipassMoneyFragment;
 
-    public PayByPrimeTask(Context context, String prime, String details, MainActivity mainActivity) {
+    public PayByPrimeTask(String prime, String details, IpassMoneyFragment ipassMoneyFragment, boolean remember) {
         this.details = details;
-        this.mainActivity = mainActivity;
+        this.ipassMoneyFragment = ipassMoneyFragment;
 
         String mainServerUrl = Constants.TAPPAY_DOMAIN;
-        Log.d(TAG,"mainServerUrl: " + mainServerUrl);
         this.targetUrl = mainServerUrl + Constants.TAPPAY_PAY_BY_PRIME_URL;
 
         jsonRequest = new JSONObject();
@@ -48,17 +46,17 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
         cardHolder = new JSONObject();
 
         try {
-//            shippingAddress.put("country_code", "TW");
-//            shippingAddress.put("lines", "台北市中正區羅斯福路100號六樓");
-//            shippingAddress.put("postcode", "100");
-//
-//            billingAddress.put("country_code", "TW");
-//            billingAddress.put("lines", "台北市中正區羅斯福路100號六樓");
-//            billingAddress.put("postcode", "100");
+            shippingAddress.put("country_code", "TW");
+            shippingAddress.put("lines", "台北市中正區羅斯福路100號六樓");
+            shippingAddress.put("postcode", "100");
 
-//            shopperInfo.put("shipping_address", shippingAddress);
-//            shopperInfo.put("billing_address", billingAddress);
-//            extraInfo.put("shopper_info", shopperInfo);
+            billingAddress.put("country_code", "TW");
+            billingAddress.put("lines", "台北市中正區羅斯福路100號六樓");
+            billingAddress.put("postcode", "100");
+
+            shopperInfo.put("shipping_address", shippingAddress);
+            shopperInfo.put("billing_address", billingAddress);
+            extraInfo.put("shopper_info", shopperInfo);
 
             resultUrl.put("frontend_redirect_url", "https://www.google.com.tw");
             resultUrl.put("backend_notify_url", "https://www.google.com.tw");
@@ -66,17 +64,17 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
             cardHolder.put("phone_number", "+8860924951774");
             cardHolder.put("name", "test");
             cardHolder.put("email", "test@gmail.com");
-            cardHolder.put("bank_member_id", "test24951774");
+            cardHolder.put("bank_member_id", "test" + System.currentTimeMillis());
 
             jsonRequest.put("prime", prime);
             jsonRequest.put("partner_key", Constants.PARTNER_KEY);
             jsonRequest.put("merchant_id", Constants.MERCHANT_ID);
             jsonRequest.put("amount", 8);
-            jsonRequest.put("currency", "TWD");
             jsonRequest.put("details", this.details);
-//            jsonRequest.put("extra_info", extraInfo);
+            jsonRequest.put("extra_info", extraInfo);
             jsonRequest.put("result_url", resultUrl);
             jsonRequest.put("cardholder", cardHolder);
+            jsonRequest.put("remember", remember);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -117,6 +115,7 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
 
     @Override
     protected void onPostExecute(JSONObject jsonObject) {
+
         try {
             int status = jsonObject.getInt("status");
             switch (status) {
@@ -124,18 +123,19 @@ public class PayByPrimeTask extends AsyncTask<String, Void, JSONObject> {
                     Log.d(TAG, "success, result : " + jsonObject);
                     String paymentUrl = jsonObject.getString("payment_url");
                     String text = "Pay-by-prime: payment_url = " + paymentUrl;
-                    this.mainActivity.showMessage(text, true, paymentUrl);
+                    this.ipassMoneyFragment.showMessage(text, true, paymentUrl);
                     break;
                 case -1:
                     Log.d(TAG, "failed, result : " + jsonObject);
-                    this.mainActivity.showMessage(jsonObject.toString(), false, "");
+                    this.ipassMoneyFragment.showMessage(jsonObject.toString(), false, "");
                     break;
                 default:
-                    this.mainActivity.showMessage(jsonObject.toString(), false, "");
+                    this.ipassMoneyFragment.showMessage(jsonObject.toString(), false, "");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @NonNull

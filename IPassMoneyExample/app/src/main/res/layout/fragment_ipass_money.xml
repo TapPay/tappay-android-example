@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,24 +8,47 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:weightSum="1">
 
         <TextView
             android:id="@+id/tvMerchantId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_weight="1"
             android:gravity="center"
             android:textSize="20dp"
             android:text="Merchant ID" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
         <EditText
             android:id="@+id/etMerchantId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
-            android:text="PX.PAY.PLUS.TEST.EC.NEW" />
+            android:layout_weight="1"
+            android:text="IPASS.MONEY.ONLINE.EC.TEST" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tvAppDeepLinks"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="Deep links - App links" />
 
     </LinearLayout>
 
@@ -39,13 +63,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="pxpayplusexample://pxpayplus.uri:8888/test" />
+            android:text="ipassmoneyexample://ipassmoney.uri:8888/test" />
+
 <!--        <EditText-->
 <!--            android:id="@+id/inputUrl"-->
 <!--            android:layout_width="0dp"-->
 <!--            android:layout_height="match_parent"-->
 <!--            android:layout_weight="1"-->
-<!--            android:text="https://pxpayplus.universal-links.com/test" />-->
+<!--            android:text="https://ipassmoney.universal-links.com/test" />-->
 
     </LinearLayout>
 
@@ -59,25 +84,17 @@
             android:id="@+id/btnGetPrime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="get prime" />
 
         <Button
             android:id="@+id/btnPayByPrime"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:text="pay by prime" />
-
-        <CheckBox
-            android:id="@+id/cbRemember"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Remember = false" />
-
-        <Button
-            android:id="@+id/btnRedirectUrl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="redirect url" />
 
     </LinearLayout>
 
@@ -88,12 +105,25 @@
 
         <Button
             android:id="@+id/btnRefresh"
-            android:layout_width="100dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
             android:text="Refresh" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
 
+            <ProgressBar
+                android:id="@+id/progressCircular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,21 +135,19 @@
             android:id="@+id/tvGetPrimeResultState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="get prime result:" />
 
         <TextView
             android:id="@+id/tvPayByPrimeResultState"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:text="pay by prime result:" />
 
         <TextView
-            android:id="@+id/tvPXPayPlusResult"
+            android:id="@+id/tvIpassMoneyResult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="px pay plus result:" />
+            android:text="ipass money result:" />
     </LinearLayout>
+
 </LinearLayout>

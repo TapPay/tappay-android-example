@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvGetPrimeResultState, tvPayByPrimeResultState, tvPXPayPlusResult;
     private EditText etMerchantId, inputUrl;
     private Button btnGetPrime, btnPayByPrime, btnRefresh, btnRedirectUrl;
+    private CheckBox cbRemember;
 
     private AlertDialog loadingDialog;
     private TPDPXPayPlus tpdPXPayPlus;
@@ -164,6 +166,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         etMerchantId = findViewById(R.id.etMerchantId);
         inputUrl = findViewById(R.id.inputUrl);
         inputUrl.addTextChangedListener(textWatcher);
+
+        cbRemember = findViewById(R.id.cbRemember);
+        cbRemember.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                cbRemember.setText("remember = true");
+                etMerchantId.setText("px.pay.plus.test.bind");
+                Toast.makeText(MainActivity.this, "DEBIT交易", Toast.LENGTH_SHORT).show();
+            } else {
+                cbRemember.setText("remember = false");
+                etMerchantId.setText("px.pay.plus.test.ec");
+                Toast.makeText(MainActivity.this, "EC交易", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
