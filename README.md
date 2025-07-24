@@ -725,3 +725,60 @@ bank_transaction_id
 order_number
 ```
 
+#
+
+## AFTEE
+
+1. Import tpdirect.aar into your project.
+2. Use TPDSetup to initialize the SDK and setup environment.
+``` android
+TPDSetup.initInstance(getApplicationContext(),
+                Constants.APP_ID, Constants.APP_KEY, TPDServerType.Sandbox);
+```
+
+3. Specify intent-filter to an Activity for receiving AFTEE Result with [Android deep links] in AndroidManifest.xml and set launch mode to "SingleTask"
+
+ex:
+``` xml
+<activity
+    android:name=".MainActivity"
+    android:launchMode="singleTask">
+
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+
+    <intent-filter android:autoVerify="true">
+        <action android:name="android.intent.action.VIEW" />
+
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+
+        <data
+            android:host="your host"
+            android:pathPattern="/your path"
+            android:scheme="https" />
+
+    </intent-filter>
+</activity>
+```
+
+
+4.  Open corresponding AFTEE payment method by paymentUrl obtained from TapPay pay-by-prime API
+``` Java
+tpdAftee.redirectWithUrl(paymentUrl);
+```
+
+5. Receive AFTEE Result in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
+
+Following attribute if you need to show in your UI
+
+``` 
+status
+rec_trade_id
+bank_transaction_id
+order_number
+```
+
