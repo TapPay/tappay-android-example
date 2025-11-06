@@ -1,0 +1,37 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="activity_horizontal_margin_normal">16dp</dimen>
+    <dimen name="activity_vertical_margin_normal">16dp</dimen>
+    <dimen name="activity_horizontal_margin_large">32dp</dimen>
+    <dimen name="activity_vertical_margin_large">32dp</dimen>
+
+    <dimen name="margin_extra_small">2dp</dimen>
+    <dimen name="margin_small">4dp</dimen>
+    <dimen name="margin_normal">8dp</dimen>
+    <dimen name="margin_large">16dp</dimen>
+    <dimen name="margin_extra_large">24dp</dimen>
+    <dimen name="margin_extra_extra_large">32dp</dimen>
+
+    <dimen name="text_size_extra_small">16dp</dimen>
+    <dimen name="text_size_small">18dp</dimen>
+    <dimen name="text_size_normal">20dp</dimen>
+    <dimen name="text_size_large">22dp</dimen>
+    <dimen name="text_size_extra_large">30dp</dimen>
+    <dimen name="text_size_extra_extra_large">40dp</dimen>
+
+    //widget height
+    <dimen name="button_height_normal">35dp</dimen>
+    <dimen name="button_height_large">45dp</dimen>
+    <dimen name="button_height_extra_large">55dp</dimen>
+
+    <dimen name="edittext_height_small">30dp</dimen>
+    <dimen name="edittext_height_normal">35dp</dimen>
+    <dimen name="edittext_height_large">45dp</dimen>
+    <dimen name="edittext_height_extra_large">55dp</dimen>
+    <dimen name="edittext_height_extra_extra_large">65dp</dimen>
+    <dimen name="dialog_radius_normal">15dp</dimen>
+    <dimen name="edittext_radius_normal">5dp</dimen>
+    <dimen name="button_radius_normal">5dp</dimen>
+</resources>
