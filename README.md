@@ -73,9 +73,8 @@ JSON string For example:
     ```
 
 4. (Option) Enable cardholder feature if you need to use cardholder info.
-    ```
+
     Enable name_en
-    ```
     ```Java
     tpdForm.setNameEnColumn(true);
     ```
@@ -880,9 +879,8 @@ order_number
     ```
 
 4.  (Option) Enable cardholder columns in TPDCardholderForm if needed.
-    ```
+
     Enable email
-    ```
     ```Java
     tpdForm.setEmailColumn(true);
     ```
