@@ -1,0 +1,2 @@
+rootProject.name = "GogoPayExample"
+include ':app'
