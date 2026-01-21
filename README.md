@@ -952,7 +952,7 @@ ex:
 
 4.  Open corresponding GogoPay payment method by paymentUrl obtained from TapPay pay-by-prime API
 ``` Java
-tpdOpPay.redirectWithUrl(paymentUrl);
+tpdGogoPay.redirectWithUrl(paymentUrl);
 ```
 
 5. Receive GogoPay Result in Activity life cycle "onCreate" or "onNewIntent" (depend on the activity had been destroyed or not)
